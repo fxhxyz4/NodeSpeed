@@ -1,6 +1,16 @@
 # Contribution rules
 
 # _NodeSpeed cli:_
+
+### how to build:
+
+```sh
+git clone https://github.com/fxhxyz4/NodeSpeed.git && cd NodeSpeed/scripts &&
+sudo chmod +x ./build_cli.sh && ./build_cli.sh
+```
+
+#
+
 ### variables rules:
 
 + __var & global__
