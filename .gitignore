@@ -7,7 +7,6 @@
 .jshintrc
 .pre-commit-config.yaml
 .travis.yml
-contribution.md
 docker/
 webpack.config.js
 
