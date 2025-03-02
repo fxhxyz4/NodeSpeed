@@ -1,0 +1,19 @@
+{
+	"text": {
+		"en": {
+			"1": ["text1 level 1 lol its a cool idea"],
+			"2": ["text1 level 2", "text2 level 2"],
+			"3": ["text1 level 3", "text2 level 3"]
+		},
+		"ru": {
+			"1": ["текст1 level 1", "текст2 level 1"],
+			"2": ["текст1 level 2", "текст2 level 2"],
+			"3": ["текст1 level 3", "текст2 level 3"]
+		},
+		"ua": {
+			"1": ["укр1 level 1", "укр2 level 1"],
+			"2": ["укр1 level 2", "укр2 level 2"],
+			"3": ["укр1 level 3", "укр2 level 3"]
+		}
+	}
+}
