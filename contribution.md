@@ -5,8 +5,56 @@
 ### how to build:
 
 ```sh
-git clone https://github.com/fxhxyz4/NodeSpeed.git && cd NodeSpeed/scripts &&
-sudo chmod +x ./build_cli.sh && ./build_cli.sh
+git clone https://github.com/fxhxyz4/NodeSpeed.git && cd NodeSpeed && npm i &&
+cd scripts && sudo chmod +x ./build_cli.sh && ./build_cli.sh
+```
+
+#
+
+### code structure:
+```
+/NodeSpeed
+ ├──/build                # nodespeed cli build
+ ├──/src                  # source folder
+     ├──/config           # nodespeed cli config
+     ├──/data             # data.json with random text
+     ├──/modules          # main program modules
+         ├──/cmd          # commands
+         ├── /utils       # utils functions
+     ├── main.js          # main file
+     └── package.json     # package.json
+```
+
+#
+
+### how to test:
+```
+use this commands from package.json file from test:
+
+npm run test-h
+npm run test-a
+npm run test-v
+npm run test-contact
+npm run test-helpCmd
+npm run test-c
+npm run test-l
+npm run test-m
+npm run test-t
+npm run test-s
+npm run test-s2
+npm run test-stats
+npm run test-o
+npm run test-all-normal
+npm run test-all-normal-s
+npm run test-all-timed
+npm run test-all-timed-s
+```
+
+#
+
+### code style:
+```
+using prettier & editorconfig
 ```
 
 #
