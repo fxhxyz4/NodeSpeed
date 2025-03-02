@@ -77,6 +77,10 @@ sudo chmod +x ./build_cli.sh && ./build_cli.sh
     ```
 
 + __Quotes__: _only double "" quotes_
+ 
++ __Classes__: _only PascalCase format_
+
++ __File naming__: _only pascalCase format (this also applies to classes)_
 
 + __Errors__
     + _try catch(e)_
