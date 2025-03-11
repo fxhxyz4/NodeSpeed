@@ -1,5 +1,18 @@
-# @Ignore
-**
-
-# only js
-!**/*.js
+node_modules
+dist
+build
+logs
+coverage
+.next
+.turbo
+.angular
+.svelte-kit
+*.log*
+*.log
+*.lock
+*.yaml
+*.yml
+*.svg
+*rc.*
+*.md
+.*ignore
