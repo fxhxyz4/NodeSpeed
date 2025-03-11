@@ -1,0 +1,13 @@
+{
+    "presets": [
+        [
+            "@babel/preset-env",
+            {
+                "targets": "node 18",
+                "useBuiltIns": "usage",
+                "debug": true
+            }
+        ]
+    ],
+    "plugins": ["@babel/plugin-syntax-import-assertions"]
+}
