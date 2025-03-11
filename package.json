@@ -1,0 +1,69 @@
+{
+  "name": "NodeSpeed",
+  "version": "1.0.0",
+  "description": "CLI tool designed to test and improve typing speed. It allows users to take typing speed tests, supports different difficulty levels and languages, and logs results for further analysis",
+  "keywords": [
+    "type",
+    "speed type",
+    "nodejs cli",
+    "axios"
+  ],
+  "type": "module",
+  "author": {
+    "name": "fxhxyz4",
+    "email": "fxhsec@proton.me",
+    "url": "https://fxhxyz.vercel.app"
+  },
+  "homepage": "https://github.com/fxhxyz4/nodespeed/",
+  "bugs": "https://github.com/fxhxyz4/nodespeed/issues",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/fxhxyz4/nodespeed.git"
+  },
+  "maintainers": [
+    {
+      "name": "fxhxyz4",
+      "email": "fxhsec@proton.me"
+    }
+  ],
+  "license": "NOT MIT",
+  "os": [
+    "linux",
+    "darwin",
+    "win32"
+  ],
+  "pkg": {
+    "assets": [
+      "./src/data/*"
+    ]
+  },
+  "scripts": {
+    "build-linux": "pkg ./build/js/cli.min.js --experimental-modules --targets node18-linuxstatic-x64 --output ./build/NodeSpeed-linux",
+    "build-win": "pkg ./build/js/cli.min.js --experimental-modules --targets node18-win-x64 --output ./build/NodeSpeed-win",
+    "build-mac": "pkg ./build/js/cli.min.js --experimental-modules --targets node18-macos-x64 --output ./build/NodeSpeed-mac",
+    "build": "npm run build-linux && npm run build-win && npm run build-mac",
+    "jshint": "jshint -c ./.jshintrc --jslint-reporter > ./report/jslint.xml",
+    "eslint": "echo eslint",
+    "lint": "npm run jshint && npm run eslint",
+    "format": "prettier --write .",
+    "prepare": "husky || true",
+    "prebuild": "webpack -c webpack.config.js",
+    "test": "echo test"
+  },
+  "devDependencies": {
+    "@fxhxyz/prettier-config": "^1.1.0",
+    "prettier": "^3.5.2"
+  },
+  "dependencies": {
+    "@babel/plugin-syntax-import-assertions": "^7.26.0",
+    "@commitlint/cli": "^19.8.0",
+    "@commitlint/config-conventional": "^19.8.0",
+    "babel-loader": "^10.0.0",
+    "husky": "^9.1.7",
+    "jshint": "^2.13.6",
+    "pkg": "^5.8.1"
+  },
+  "engines": {
+    "node": "18.x"
+  }
+}
