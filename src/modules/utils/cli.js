@@ -9,48 +9,48 @@ import { helpCmd } from "../cmd/helpCmd.js";
 import { Messages } from "./messages.js";
 
 const cli = async (Params) => {
-    if (!Params || typeof Params !== "object") {
-        Messages.error("Params object incorrect");
-        return;
+  if (!Params || typeof Params !== "object") {
+    Messages.error("Params object incorrect");
+    return;
+  }
+
+  for (const key in Params) {
+    if (Object.prototype.hasOwnProperty.call(Params, key)) {
+      const elem = Params[key];
+      config[key] = elem;
+
+      switch (key) {
+        case "h":
+        case "help":
+          typeHelp();
+          break;
+        case "helpCmd":
+          helpCmd(key, elem);
+          break;
+        case "a":
+        case "about":
+          aboutCmd();
+          break;
+        case "v":
+        case "version":
+          versionCmd();
+          break;
+        case "contact":
+          contactCmd();
+          break;
+        case "stats":
+          // statsCmd();
+          break;
+        case "o":
+        case "online":
+          // onlineCmd();
+          break;
+      }
     }
+  }
 
-    for (const key in Params) {
-        if (Object.prototype.hasOwnProperty.call(Params, key)) {
-            const elem = Params[key];
-            config[key] = elem;
-
-            switch(key) {
-                case "h":
-                case "help":
-                    typeHelp();
-                    break;
-                case "helpCmd":
-                    helpCmd(key, elem);
-                    break;
-                case "a":
-                case "about":
-                    aboutCmd();
-                    break;
-                case "v":
-                case "version":
-                    versionCmd();
-                    break;
-                case "contact":
-                    contactCmd();
-                    break;
-                case "stats":
-                    // statsCmd();
-                    break;
-                case "o":
-                case "online":
-                    // onlineCmd();
-                    break;
-            }
-        }
-    }
-
-    let result = await checkConfig();
-    timeoutPerStart([ result, config.m, config.t ]);
-}
+  let result = await checkConfig();
+  timeoutPerStart([result, config.m, config.t]);
+};
 
 export { cli };

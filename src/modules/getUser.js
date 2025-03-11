@@ -6,7 +6,7 @@ const getUser = () => {
   return new Promise((resolve) => {
     const rl = readline.createInterface({
       input: process.stdin,
-      output: process.stdout
+      output: process.stdout,
     });
 
     const askUsername = () => {

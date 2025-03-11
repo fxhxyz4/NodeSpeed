@@ -1,12 +1,12 @@
 const parseArgs = (Arguments) => {
-    let parse = Object.fromEntries(
-        Arguments.map(arg => {
-            let [key, value] = arg.split("=");
-            return [key.replace(/^--?/, ''), value];
-        })
-    )
+  let parse = Object.fromEntries(
+    Arguments.map((arg) => {
+      let [key, value] = arg.split("=");
+      return [key.replace(/^--?/, ""), value];
+    }),
+  );
 
-    return parse;
-}
+  return parse;
+};
 
 export { parseArgs };

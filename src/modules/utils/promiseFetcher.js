@@ -10,6 +10,6 @@ const promiseFetcher = async (Url) => {
   const result = response.data;
 
   return result;
-}
+};
 
 export { promiseFetcher };

@@ -28,7 +28,7 @@ const checkSource = (Source) => {
 
   const result = fs.readFileSync(fullPath, { encoding: "utf-8" });
   return result;
-}
+};
 
 const boolUrl = (Source) => {
   try {
@@ -37,6 +37,6 @@ const boolUrl = (Source) => {
   } catch {
     return false;
   }
-}
+};
 
 export { checkSource };

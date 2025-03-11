@@ -31,6 +31,6 @@ const resultPath = () => {
   fs.appendFileSync(csvFile, csvColumns, { encoding: "utf-8" });
 
   return { txtFile, csvFile, jsonFile };
-}
+};
 
 export { resultPath };

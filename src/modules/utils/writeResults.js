@@ -4,7 +4,7 @@ import { Messages } from "./messages.js";
 import fs from "fs";
 
 const writeResults = (Results) => {
-  let { user, sourceLength,  numOfIncorrect, pastTime, sourceText, answerText } = Results;
+  let { user, sourceLength, numOfIncorrect, pastTime, sourceText, answerText } = Results;
 
   let answerTextReplaced = answerText.replace("\n", "");
   let sourceTextReplaced = sourceText.replace("\n", "");
@@ -44,7 +44,7 @@ const writeResults = (Results) => {
     incorrectWords: `${numOfIncorrect}`,
     pastTime: `${pastTime}`,
     sourceText: `${sourceTextReplaced}`,
-    answerText: `${answerTextReplaced}`
+    answerText: `${answerTextReplaced}`,
   };
 
   data.push(jsonMessage);
@@ -53,6 +53,6 @@ const writeResults = (Results) => {
   fs.appendFileSync(csvFile, csvMessage, { encoding: "utf-8" });
 
   fs.writeFileSync(jsonFile, JSON.stringify(data, null, 2), { encoding: "utf-8" });
-}
+};
 
 export { writeResults };
