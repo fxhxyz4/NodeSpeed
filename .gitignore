@@ -1,14 +1,9 @@
 # Misc
-.babelrc
-.browserslistrc
 .eslintignore
 .eslintrc
 .github/workflows/
-.jshintrc
-.pre-commit-config.yaml
 .travis.yml
 docker/
-webpack.config.js
 
 text.txt
 build/
