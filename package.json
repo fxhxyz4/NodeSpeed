@@ -42,16 +42,16 @@
     "build-win": "pkg ./build/js/cli.min.js --experimental-modules --targets node18-win-x64 --output ./build/NodeSpeed-win",
     "build-mac": "pkg ./build/js/cli.min.js --experimental-modules --targets node18-macos-x64 --output ./build/NodeSpeed-mac",
     "build": "npm run build-linux && npm run build-win && npm run build-mac",
-    "jshint": "jshint -c ./.jshintrc --jslint-reporter > ./report/jslint.xml",
-    "eslint": "echo eslint",
-    "lint": "npm run jshint && npm run eslint",
+    "jshint": "jshint ./src/**/*.js -c ./.jshintrc --jslint-reporter > ./report/jslint.xml",
     "format": "prettier --write .",
     "prepare": "husky || true",
     "prebuild": "webpack -c webpack.config.js",
-    "test": "echo test"
+    "test": "echo test",
+    "precommit": "npm run format && npm run jshint && npm run test && npm run prebuild && npm run build"
   },
   "devDependencies": {
     "@fxhxyz/prettier-config": "^1.1.0",
+    "concurrently": "^9.1.2",
     "prettier": "^3.5.2"
   },
   "dependencies": {
@@ -61,6 +61,7 @@
     "babel-loader": "^10.0.0",
     "husky": "^9.1.7",
     "jshint": "^2.13.6",
+    "jshint-json": "^3.0.0",
     "pkg": "^5.8.1"
   },
   "engines": {
