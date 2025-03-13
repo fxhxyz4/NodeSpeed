@@ -1,9 +1,12 @@
 #!/bin/sh
 
 npm run format
-npm run lint
+npm run jshint-cli
+
+npm run eslint
+
+npm run test
 
 npm run prebuild
 npm run build
 
-npm run test
