@@ -15,7 +15,7 @@ const timeoutPerStart = async (DataText) => {
     await getUser();
   }
 
-  Messages.log("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+  Messages.log("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
   Messages.log(`Start writing after the timeout (${TIMEOUT}s) is over.`);
 
   setTimeout(() => {

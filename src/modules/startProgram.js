@@ -11,6 +11,43 @@ let sourceText = "",
   typedText = "",
   cursorPos = 0;
 
+const processAnswer = (Answer) => {
+  const numOfIncorrect = searchIncorrectWords(Answer, sourceText);
+  const sourceLength = sourceText.split(" ").length;
+
+  let user = config.u;
+  let answerText = Answer;
+
+  Messages.log("\n");
+
+  Messages.log("================= Results =================");
+  Messages.log("\n");
+
+  Messages.log(`Source words: ${sourceLength}`);
+
+  Messages.log(`Incorrect words: ${numOfIncorrect}`);
+  pastTime = ((timeEnd - timeStart) / 1000).toFixed(2);
+
+  Messages.log(`Past time: ${pastTime}s`);
+
+  Messages.log("\n");
+  Messages.log("================= Results =================");
+
+  Messages.log("\n");
+
+  if (user !== "anon") {
+    writeResults({ user, sourceLength, numOfIncorrect, pastTime, sourceText, answerText });
+  }
+};
+
+const updateConsole = () => {
+  process.stdout.clearLine(0);
+  process.stdout.cursorTo(0);
+
+  process.stdout.write(`\x1b[96m> ${typedText}`);
+  process.stdout.cursorTo(cursorPos + 2);
+};
+
 const startProgram = (Data) => {
   let mode = Data[1];
   let timeout = Number(Data[2]);
@@ -98,43 +135,6 @@ const startProgram = (Data) => {
 
   timeStart = Date.now();
   process.stdout.write("\x1b[96m> ");
-};
-
-const updateConsole = () => {
-  process.stdout.clearLine(0);
-  process.stdout.cursorTo(0);
-
-  process.stdout.write(`\x1b[96m> ${typedText}`);
-  process.stdout.cursorTo(cursorPos + 2);
-};
-
-const processAnswer = (Answer) => {
-  const numOfIncorrect = searchIncorrectWords(Answer, sourceText);
-  const sourceLength = sourceText.split(" ").length;
-
-  let user = config.u;
-  let answerText = Answer;
-
-  Messages.log("\n");
-
-  Messages.log("================= Results =================");
-  Messages.log("\n");
-
-  Messages.log(`Source words: ${sourceLength}`);
-
-  Messages.log(`Incorrect words: ${numOfIncorrect}`);
-  pastTime = ((timeEnd - timeStart) / 1000).toFixed(2);
-
-  Messages.log(`Past time: ${pastTime}s`);
-
-  Messages.log("\n");
-  Messages.log("================= Results =================");
-
-  Messages.log("\n");
-
-  if (user !== "anon") {
-    writeResults({ user, sourceLength, numOfIncorrect, pastTime, sourceText, answerText });
-  }
 };
 
 export { startProgram };

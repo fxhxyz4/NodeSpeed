@@ -4,7 +4,17 @@ import { fileURLToPath } from "node:url";
 import path from "node:path";
 import fs from "node:fs";
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const __dirname = path.dirname(fileURLToPath(import.meta.url)); // jshint ignore:line
+let url = {};
+
+const boolUrl = (Source) => {
+  try {
+    url = new URL(Source);
+    return true;
+  } catch {
+    return false;
+  }
+};
 
 const checkSource = (Source) => {
   if (!Source) {
@@ -28,15 +38,6 @@ const checkSource = (Source) => {
 
   const result = fs.readFileSync(fullPath, { encoding: "utf-8" });
   return result;
-};
-
-const boolUrl = (Source) => {
-  try {
-    new URL(Source);
-    return true;
-  } catch {
-    return false;
-  }
 };
 
 export { checkSource };

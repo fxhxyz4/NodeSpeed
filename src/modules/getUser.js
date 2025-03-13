@@ -23,7 +23,7 @@ const getUser = () => {
           return askUsername();
         }
 
-        config["u"] = user.trim();
+        config.u = user.trim();
         rl.close();
 
         resolve(true);

@@ -1,9 +1,9 @@
-import fs from "fs";
-import path from "path";
 import { fileURLToPath } from "url";
+import path from "path";
+import fs from "fs";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __filename = fileURLToPath(import.meta.url); // jshint ignore:line
+const __dirname = path.dirname(__filename); // jshint ignore:line
 
 const packageJsonPath = path.resolve(__dirname, "../../package.json");
 const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, "utf-8"));
@@ -11,22 +11,49 @@ const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, "utf-8"));
 const { name, description, version, keywords, main, author, homepage, bugs, license } = packageJson;
 
 class PackageJSON {
-  static NAME = name;
-  static DESC = description;
+  static get NAME() {
+    return name;
+  }
 
-  static VERSION = version;
-  static KEYWORDS = keywords;
+  static get DESC() {
+    return description;
+  }
 
-  static MAIN = main;
-  static AUTHOR_NAME = author.name;
+  static get VERSION() {
+    return version;
+  }
 
-  static AUTHOR_EMAIL = author.email;
-  static AUTHOR_URL = author.url;
+  static get KEYWORDS() {
+    return keywords;
+  }
 
-  static HOME_PAGE = homepage;
-  static BUGS_URL = bugs;
+  static get MAIN() {
+    return main;
+  }
 
-  static LICENSE = license;
+  static get AUTHOR_NAME() {
+    return author.name;
+  }
+
+  static get AUTHOR_EMAIL() {
+    return author.email;
+  }
+
+  static get AUTHOR_URL() {
+    return author.url;
+  }
+
+  static get HOME_PAGE() {
+    return homepage;
+  }
+
+  static get BUGS_URL() {
+    return bugs;
+  }
+
+  static get LICENSE() {
+    return license;
+  }
 }
 
 export { PackageJSON };

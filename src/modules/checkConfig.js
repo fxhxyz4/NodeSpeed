@@ -2,8 +2,8 @@ import { fileURLToPath } from "url";
 import path from "path";
 import fs from "fs";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __filename = fileURLToPath(import.meta.url); // jshint ignore:line
+const __dirname = path.dirname(__filename); // jshint ignore:line
 
 const textPath = path.resolve(__dirname, "../data/data.json");
 const text = JSON.parse(fs.readFileSync(textPath, "utf-8"));

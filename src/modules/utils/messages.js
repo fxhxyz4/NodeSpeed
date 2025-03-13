@@ -1,3 +1,4 @@
+/* jshint ignore:start */
 class Messages {
   static #logType(Type, Msg) {
     if (Type && Msg) {
@@ -33,3 +34,4 @@ class Messages {
 }
 
 export { Messages };
+/* jshint ignore:end */
