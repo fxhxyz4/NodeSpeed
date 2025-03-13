@@ -5,6 +5,12 @@
 ### how to build:
 
 ```sh
+for linux users:
+
+cd scripts && sudo chmod +x ./wine.sh && ./wine.sh
+```
+
+```sh
 git clone https://github.com/fxhxyz4/NodeSpeed.git && cd NodeSpeed && npm i &&
 cd scripts && sudo chmod +x ./build_cli.sh && ./build_cli.sh
 ```
@@ -125,7 +131,7 @@ using prettier & editorconfig
     ```
 
 + __Quotes__: _only double "" quotes_
- 
+
 + __Classes__: _only PascalCase format_
 
 + __File naming__: _only pascalCase format (this also applies to classes)_
