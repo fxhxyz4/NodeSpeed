@@ -8,8 +8,8 @@ const __dirname = path.dirname(__filename); // jshint ignore:line
 const textPath = path.resolve(__dirname, "../data/data.json");
 const text = JSON.parse(fs.readFileSync(textPath, "utf-8"));
 
+import { Messages } from "../../lib/messages.js";
 import { checkSource } from "./checkSource.js";
-import { Messages } from "./utils/messages.js";
 import { config } from "../config/config.js";
 
 const checkConfig = async () => {
