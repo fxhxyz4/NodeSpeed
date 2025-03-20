@@ -77,6 +77,10 @@ const formatDate = (dateStr) => {
   return dateObj.toISOString().slice(0, 19).replace("T", " ");
 };
 
+proxy.get("/", (req, res) => {
+  res.send({ status: 200 });
+});
+
 proxy.post("/post", async (req, res, next) => {
   let userData = req.body;
   let { user, date, sourceWords, incorrectWords, pastTime, sourceText, answerText } = userData;
@@ -118,6 +122,10 @@ proxy.post("/post", async (req, res, next) => {
   } finally {
     conn.release();
   }
+});
+
+proxy.get("*", (req, res) => {
+  res.send({ status: 404 });
 });
 
 proxy.listen(PORT, async () => {
