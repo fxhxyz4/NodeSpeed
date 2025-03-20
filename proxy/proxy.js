@@ -1,3 +1,4 @@
+/* jshint ignore:start */
 import { startPool } from "./modules/db_connect.js";
 import { Messages } from "../lib/messages.js";
 import rateLimit from "express-rate-limit";
@@ -41,7 +42,6 @@ proxy.use(limiter);
 proxy.use(helmet());
 proxy.use(express.json());
 
-/* jshint ignore:start */
 const init = async () => {
   pool = await startPool();
   Messages.debug("✅ Database pool initialized");
