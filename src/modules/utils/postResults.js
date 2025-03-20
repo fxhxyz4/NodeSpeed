@@ -6,9 +6,9 @@ dotenv.config({ path: `./env/.env.dev` });
 
 const postResults = async (JsonMessage) => {
   try {
-    await axios.post(`${process.env.URL}:${process.env.PORT}/post`, JsonMessage);
+    await axios.post(`${process.env.URL}/post`, JsonMessage);
     process.exit(0);
-  } catch (error) {
+  } catch (e) {
     process.exit(1);
   }
 };
