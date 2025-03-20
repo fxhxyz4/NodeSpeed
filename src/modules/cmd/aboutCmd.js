@@ -1,5 +1,5 @@
 import { PackageJSON } from "../utils/packageJson.js";
-import { Messages } from "../utils/messages.js";
+import { Messages } from "../../../lib/messages.js";
 
 const aboutCmd = () => {
   let { NAME, DESC, HOME_PAGE, BUGS_URL, LICENSE } = PackageJSON;
