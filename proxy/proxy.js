@@ -78,7 +78,7 @@ const formatDate = (dateStr) => {
 };
 
 proxy.get("/", (req, res) => {
-  res.send({ status: 200 });
+  res.json({ status: 200 });
 });
 
 proxy.post("/post", async (req, res, next) => {
@@ -125,7 +125,7 @@ proxy.post("/post", async (req, res, next) => {
 });
 
 proxy.get("*", (req, res) => {
-  res.send({ status: 404 });
+  res.json({ status: 404 });
 });
 
 proxy.listen(PORT, async () => {
