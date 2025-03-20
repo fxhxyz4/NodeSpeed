@@ -1,3 +1,9 @@
 {
-  "recommendations": ["esbenp.prettier-vscode", "webben.browserslist", "dbaeumer.jshint", "dbaeumer.vscode-eslint"]
+  "recommendations": [
+    "esbenp.prettier-vscode",
+    "webben.browserslist",
+    "dbaeumer.jshint",
+    "dbaeumer.vscode-eslint",
+    "inferrinizzard.prettier-sql-vscode"
+  ]
 }
