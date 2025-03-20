@@ -1,6 +1,6 @@
+import { Messages } from "../../../lib/messages.js";
 import { startProgram } from "../startProgram.js";
 import { config } from "../../config/config.js";
-import { Messages } from "./messages.js";
 import { getUser } from "../getUser.js";
 
 const timeoutPerStart = async (DataText) => {
