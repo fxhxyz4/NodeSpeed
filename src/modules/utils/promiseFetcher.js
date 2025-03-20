@@ -1,4 +1,4 @@
-import { Messages } from "./messages.js";
+import { Messages } from "../../../lib/messages.js";
 import axios from "axios";
 
 const promiseFetcher = async (Url) => {
