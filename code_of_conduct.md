@@ -35,8 +35,8 @@ If you encounter behavior that violates this Code of Conduct, please report it t
 
 If you experience or witness any behavior that violates this Code of Conduct, please report it by contacting:
 
-- **Email**: [Mit246@proton.me](mailto:Mit246@proton.me)
-- **Community questions**: [fxhxyz](https://t.me/FxHxYz) or [betcor](https://t.me/betcorr)
+- **Email**: [fxhsec@proton.me](mailto:fxhsec@proton.me)
+- **Community questions**: [fxhxyz](https://t.me/FemboyJS)
 
 Reports will be taken seriously, and appropriate actions will be taken in a timely manner.
 
