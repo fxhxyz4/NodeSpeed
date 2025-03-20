@@ -1,4 +1,4 @@
-import { Messages } from "./messages.js";
+import { Messages } from "../../../lib/messages.js";
 
 const showAscii = () => {
   let art = [
