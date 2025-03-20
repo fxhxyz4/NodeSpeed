@@ -43,29 +43,36 @@
     "build-mac": "pkg ./build/js/cli.min.js --experimental-modules --targets node18-macos-x64 --output ./build/NodeSpeed-mac",
     "changeIcon": "node ./pkg/changeIcon.js",
     "build": "npm run build-linux && npm run build-win && npm run build-mac && npm run changeIcon",
-    "jshint-cli": "jshint ./src/modules/cmd/*.js ./src/modules/utils/*.js ./src/*.js -c ./.jshintrc --jslint-reporter > ./report/jslint-cli.xml",
+    "jshint:cli": "jshint ./src/modules/cmd/*.js ./src/modules/utils/*.js ./src/*.js -c ./.jshintrc --jslint-reporter > ./report/jslint-cli.xml",
     "eslint": "echo eslint",
     "format": "prettier --write .",
     "prepare": "husky || true",
-    "prebuild": "webpack -c webpack.config.js",
     "test": "echo test",
-    "precommit": "npm run format && npm run jshint-cli || true && npm run eslint || true && npm run test || true",
-    "prepublish": "npm run precommit || true && npm run prebuild && npm run build"
+    "prebuild": "webpack -c webpack.config.js",
+    "precommit": "npm run format && npm run jshint:cli || true && npm run eslint || true && npm run test || true",
+    "prepublish": "npm run precommit || true && npm run build || true"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.18.6",
+    "@babel/plugin-proposal-private-methods": "^7.18.6",
+    "@babel/plugin-syntax-import-assertions": "^7.26.0",
     "@fxhxyz/prettier-config": "^1.1.0",
+    "babel-loader": "^10.0.0",
     "concurrently": "^9.1.2",
+    "core-js": "^3.41.0",
+    "dotenv-webpack": "^8.1.0",
     "prettier": "^3.5.2",
-    "rcedit": "^4.0.1"
+    "rcedit": "^4.0.1",
+    "webpack": "^5.98.0",
+    "webpack-manifest-plugin": "^5.0.1"
   },
   "dependencies": {
-    "@babel/plugin-syntax-import-assertions": "^7.26.0",
     "@commitlint/cli": "^19.8.0",
     "@commitlint/config-conventional": "^19.8.0",
-    "babel-loader": "^10.0.0",
     "husky": "^9.1.7",
     "jshint": "^2.13.6",
-    "pkg": "^5.8.1"
+    "pkg": "^5.8.1",
+    "regenerator-runtime": "^0.14.1"
   },
   "engines": {
     "node": "18.x"
