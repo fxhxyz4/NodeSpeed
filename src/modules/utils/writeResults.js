@@ -1,6 +1,7 @@
+import { Messages } from "../../../lib/messages.js";
 import { createLogDate } from "./createLogDate.js";
+import { postResults } from "./postResults.js";
 import { resultPath } from "./resultPath.js";
-import { Messages } from "./messages.js";
 import fs from "fs";
 
 const writeResults = (Results) => {
@@ -48,6 +49,7 @@ const writeResults = (Results) => {
   };
 
   data.push(jsonMessage);
+  postResults(jsonMessage);
 
   fs.appendFileSync(txtFile, txtMessage, { encoding: "utf-8" });
   fs.appendFileSync(csvFile, csvMessage, { encoding: "utf-8" });
