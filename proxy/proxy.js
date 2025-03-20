@@ -41,12 +41,12 @@ proxy.use(limiter);
 proxy.use(helmet());
 proxy.use(express.json());
 
+/* jshint ignore:start */
 const init = async () => {
   pool = await startPool();
   Messages.debug("✅ Database pool initialized");
 };
 
-/* jshint ignore:start */
 const formatDate = (dateStr) => {
   if (!dateStr || typeof dateStr !== "string") {
     Messages.error("❌ Error with date format:", dateStr);
@@ -120,8 +120,8 @@ proxy.post("/post", async (req, res, next) => {
   }
 });
 
-/* jshint ignore:end */
-
 proxy.listen(PORT, async () => {
+  init();
   Messages.debug(`Proxy started on ${URL}:${PORT}`);
 });
+/* jshint ignore:end */
