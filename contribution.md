@@ -15,6 +15,10 @@ git clone https://github.com/fxhxyz4/NodeSpeed.git && cd NodeSpeed && npm i &&
 cd scripts && sudo chmod +x ./build_cli.sh && ./build_cli.sh
 ```
 
+```sh
+rename .env.example to .env & type your info
+```
+
 #
 
 ### code structure:
@@ -142,3 +146,27 @@ using prettier & editorconfig
 
 + __not use //TODO and something in code__
     +  __use https://github.com/fxhxyz4/nodespeed/issues/new with TODO label!__
+ 
+# _Proxy server:_
++ __installation__
+    ```sh
+        npm i
+    ```
+
++ __env__
+    ```sh
+        rename .env.example to .env & type your info
+    ```
+
++ __dev with nodemon__
+    ```sh
+        npm run dev
+    ```
+
++ __deploy__
+    ```sh
+        npm run prod
+    ```
+
+# _DB server:_
++ __use mysqldump ~> ./db/schema.sql__
