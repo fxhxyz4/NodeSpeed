@@ -1,5 +1,5 @@
 import { PackageJSON } from "../utils/packageJson.js";
-import { Messages } from "../utils/messages.js";
+import { Messages } from "../../../lib/messages.js";
 
 const { AUTHOR_NAME, AUTHOR_EMAIL, AUTHOR_URL } = PackageJSON;
 
