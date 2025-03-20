@@ -15,4 +15,4 @@ _This license allows the use of this software only for personal and educational 
 + ❌ Using the code in commercial products or services.
 + ❌ Selling or licensing the code to third parties.
 
-### _To obtain permission to use the code in commercial or public projects, contact the author: [fxhxyz](t.me/fxhxyz)_
+### _To obtain permission to use the code in commercial or public projects, contact the author: [fxhxyz](https://t.me/fxhxyz)_
