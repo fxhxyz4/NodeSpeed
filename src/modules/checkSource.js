@@ -1,5 +1,5 @@
 import { promiseFetcher } from "./utils/promiseFetcher.js";
-import { Messages } from "./utils/messages.js";
+import { Messages } from "../../lib/messages.js";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 import fs from "node:fs";
