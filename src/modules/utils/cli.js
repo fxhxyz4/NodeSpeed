@@ -1,3 +1,4 @@
+import { Messages } from "../../../lib/messages.js";
 import { versionCmd } from "../cmd/versionCmd.js";
 import { contactCmd } from "../cmd/contactCmd.js";
 import { config } from "../../config/config.js";
@@ -6,7 +7,6 @@ import { timeoutPerStart } from "./timeout.js";
 import { typeHelp } from "../cmd/typeHelp.js";
 import { aboutCmd } from "../cmd/aboutCmd.js";
 import { helpCmd } from "../cmd/helpCmd.js";
-import { Messages } from "./messages.js";
 
 const cli = async (Params) => {
   if (!Params || typeof Params !== "object") {
