@@ -1,4 +1,4 @@
-import { Messages } from "./utils/messages.js";
+import { Messages } from "../../lib/messages.js";
 import { config } from "../config/config.js";
 import readline from "node:readline";
 
@@ -13,10 +13,10 @@ const getUser = () => {
       Messages.info("Use 'anon' user for not saving stats");
 
       rl.question("Type your username: ", (user) => {
-        if (!user.trim()) {
+        if (!user.trim() || user.length > 49) {
           Messages.log("\n\n");
 
-          Messages.error("User is not defined");
+          Messages.error("User is not defined or user name > 49 symbols");
           Messages.info("Try again...");
 
           Messages.log("\n\n");
