@@ -1,0 +1,49 @@
+{
+  "name": "proxy",
+  "version": "1.0.0",
+  "description": "Proxy server",
+  "keywords": [
+    "express",
+    "server",
+    "proxy"
+  ],
+  "type": "module",
+  "main": "./proxy.js",
+  "author": {
+    "name": "fxhxyz4",
+    "email": "fxhsec@proton.me",
+    "url": "https://fxhxyz.vercel.app"
+  },
+  "homepage": "https://github.com/fxhxyz4/nodespeed/",
+  "bugs": "https://github.com/fxhxyz4/nodespeed/issues",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/fxhxyz4/nodespeed.git"
+  },
+  "maintainers": [
+    {
+      "name": "fxhxyz4",
+      "email": "fxhsec@proton.me"
+    }
+  ],
+  "license": "NOT MIT",
+  "scripts": {
+    "dev": "nodemon .",
+    "prod": "node ."
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0",
+    "express-session": "^1.18.1",
+    "helmet": "^8.1.0",
+    "mysql2": "^3.13.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  },
+  "engines": {
+    "node": "18.x"
+  }
+}
