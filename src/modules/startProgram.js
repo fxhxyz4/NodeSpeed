@@ -1,6 +1,6 @@
 import { searchIncorrectWords } from "./utils/searchIncorrectWords.js";
 import { writeResults } from "./utils/writeResults.js";
-import { Messages } from "./utils/messages.js";
+import { Messages } from "../../lib/messages.js";
 import { config } from "../config/config.js";
 import readline from "node:readline";
 
@@ -73,7 +73,8 @@ const startProgram = (Data) => {
     sourceText = Data[0];
   }
 
-  Messages.log(`\x1b[95m${sourceText}\n`);
+  console.clear();
+  Messages.log(`\n\n\n\n\x1b[95m${sourceText}\n`);
 
   let isAnswered = false;
 
