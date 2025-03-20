@@ -1,4 +1,4 @@
-import { Messages } from "../utils/messages.js";
+import { Messages } from "../../../lib/messages.js";
 import { helper } from "./helper.js";
 
 let help = helper();
