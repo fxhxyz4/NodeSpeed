@@ -4,7 +4,7 @@ import { config } from "../../config/config.js";
 import { getUser } from "../getUser.js";
 
 const timeoutPerStart = async (DataText) => {
-  const TIMEOUT = 2;
+  const TIMEOUT = 10;
 
   if (!DataText) {
     Messages.error("No data to start");
