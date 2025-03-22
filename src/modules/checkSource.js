@@ -5,11 +5,10 @@ import path from "node:path";
 import fs from "node:fs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url)); // jshint ignore:line
-let url = {};
 
 const boolUrl = (Source) => {
   try {
-    url = new URL(Source);
+    new URL(Source); // jshint ignore:line
     return true;
   } catch {
     return false;
