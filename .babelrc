@@ -3,7 +3,7 @@
         [
             "@babel/preset-env",
             {
-                "targets": "defaults",
+                "targets": "node 14",
                 "useBuiltIns": "usage",
                 "corejs": 3,
                 "debug": true
