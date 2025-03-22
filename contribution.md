@@ -1,5 +1,11 @@
 # Contribution rules
 
+# _Linters:_
+```sh
+jshint - for nodejs
+eslint - multi config for web/node
+```
+
 # _NodeSpeed cli:_
 
 ### how to build:
