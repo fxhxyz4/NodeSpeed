@@ -1,8 +1,8 @@
 import dotenv from "dotenv";
 import axios from "axios";
 
-dotenv.config({ path: `./env/.env` });
-dotenv.config({ path: `./env/.env.dev` });
+dotenv.config({ path: "./env/.env" });
+dotenv.config({ path: "./env/.env.dev" });
 
 const postResults = async (JsonMessage) => {
   try {

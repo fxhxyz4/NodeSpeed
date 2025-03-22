@@ -39,7 +39,7 @@ const findCommand = (Cmd) => {
 const typeHelp = (Key, Command) => {
   if (!help || typeof help !== "object") {
     Messages.log("\n");
-    Messages.error(`Help object is incorrect`);
+    Messages.error("Help object is incorrect");
 
     return;
   }

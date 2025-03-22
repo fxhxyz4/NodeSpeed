@@ -60,7 +60,7 @@ const startProgram = (Data) => {
   if (mode === "normal") {
     timeout = 0;
   } else if (mode !== "timed" && timeout <= 0) {
-    Messages.error(`Timeout <= 0`);
+    Messages.error("Timeout <= 0");
     Messages.log("\n");
 
     rl.close();
