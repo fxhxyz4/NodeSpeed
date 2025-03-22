@@ -1,3 +1,4 @@
+import { Messages } from "../lib/messages.js";
 import { fileURLToPath } from "url";
 import rcedit from "rcedit";
 import path from "path";
@@ -12,8 +13,8 @@ rcedit(exePath, {
   icon: iconPath,
 })
   .then(() => {
-    console.log("Icon changed successfully!");
+    Messages.log("Icon changed successfully!");
   })
-  .catch((err) => {
-    console.error("Failed to change icon:", err);
+  .catch((e) => {
+    Messages.error("Failed to change icon:", e);
   });
