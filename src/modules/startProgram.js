@@ -73,7 +73,7 @@ const startProgram = (Data) => {
     sourceText = Data[0];
   }
 
-  console.clear();
+  Messages.clr();
   Messages.log(`\n\n\n\n\x1b[95m${sourceText}\n`);
 
   let isAnswered = false;
