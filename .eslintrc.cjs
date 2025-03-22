@@ -1,3 +1,3 @@
 module.exports = {
-  extends: ["@fxhxyz/eslint-config/nodejs.js"]
-};
+  extends: "@fxhxyz/eslint-config/nodejs.js"
+}
