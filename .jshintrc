@@ -9,7 +9,7 @@
     "moz": true,
     "eqnull": true,
     "asi": true,
-    "curly": false,
+    "curly": true,
     "globals": {
         "NODE_ENV": true,
         "PORT": true
@@ -43,7 +43,7 @@
     "debug": true,
     "boss": false,
     "funcscope": false,
-    "quotmark": "double",
+    "quotmark": false,
     "iterator": true,
     "loopfunc": true,
     "notypeof": true,

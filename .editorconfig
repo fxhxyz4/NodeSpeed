@@ -37,7 +37,7 @@ trim_trailing_whitespace = false
 # JavaScript/TypeScript
 [*.{htm,html,js,jsm,ts,tsx,cjs,cts,ctsx,mjs,mts,mtsx,css,sass,scss,less,pcss,svg,vue}]
 indent_style = space
-indent_size = 4
+indent_size = 2
 
 # Batch Files
 [*.{cmd,bat}]
