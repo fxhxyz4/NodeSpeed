@@ -89,7 +89,7 @@ proxy.post("/register", async (req, res) => {
 
   try {
     await postSha({ user, sha256 });
-    res.json({ status: "success", message: `User ${user} registered/updated` });
+    res.json({ status: "success", message: `User ${user} with ${sha256} registered/updated` });
   } catch (e) {
     Messages.error("❌ Error in /register:", e.message);
     res.status(500).json({ error: "Internal server error" });
@@ -108,7 +108,7 @@ proxy.post("/post", async (req, res, next) => {
     }
 
     const sql = `
-      INSERT INTO users (username, total_attempts, total_words, total_incorrect, total_time, last_attempt, last_source_text, last_answer_text)
+      INSERT INTO users (username, total_attempts, total_words, total_incorrect, total_time, last_attempt, last_source_text, last_answer_text, sha256)
       VALUES (?, 1, ?, ?, ?, ?, ?, ?)
       ON DUPLICATE KEY UPDATE
       total_attempts = total_attempts + 1,
@@ -178,8 +178,10 @@ const postSha = async ({ user, sha256 }) => {
   const sql = "INSERT INTO users (username, sha256) VALUES (?, ?) ON DUPLICATE KEY UPDATE sha256 = VALUES(sha256);";
   const conn = await pool.getConnection();
 
+  const values = [user, sha256 || ""];
+
   try {
-    await conn.execute(sql, [user, sha256]);
+    await conn.execute(sql, values);
     Messages.log(`✅ User data saved for: ${user}`);
   } catch (e) {
     Messages.error("❌ Error saving user sha256:", e.message);
