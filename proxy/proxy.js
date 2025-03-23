@@ -46,12 +46,12 @@ const init = async () => {
   Messages.debug("✅ Database pool initialized");
 };
 
-const formatDate = (dateStr) => {
-  if (!dateStr || typeof dateStr !== "string") {
+const formatDate = (DateStr) => {
+  if (!DateStr || typeof DateStr !== "string") {
     return null;
   }
 
-  const parts = dateStr.split(":").map(Number);
+  const parts = DateStr.split(":").map(Number);
 
   if (parts.length !== 6) {
     return null;
@@ -86,24 +86,29 @@ proxy.post("/register", async (req, res) => {
 
   try {
     await postSha({ user, sha256 });
+    res.status(200).json({ success: "User registered" });
   } catch (e) {
+    console.error(e);
     res.status(500).json({ error: "Internal server error" });
   }
 });
 
-proxy.post("/post", async (req, res, next) => {
-  let { user, date, sourceWords, incorrectWords, pastTime, sourceText, answerText } = req.body;
+proxy.post("/post", async (req, res) => {
+  const { user, sha256, date, sourceWords, incorrectWords, pastTime, sourceText, answerText } = req.body;
 
-  const username = user.startsWith("@") ? user.slice(1) : user;
+  if (!user || !sha256) {
+    return res.status(400).json({ error: "Missing user or sha256" });
+  }
 
   try {
-    const userSha256 = await getSha(username);
-    if (!userSha256 || !(await checkSha(username, userSha256))) {
-      return res.status(400).json({ error: "Invalid user or sha256 mismatch" });
+    const dbSha256 = await getSha(user);
+
+    if (!dbSha256 || dbSha256 !== sha256) {
+      return res.status(400).json({ error: "Invalid sha256" });
     }
 
     const sql = `
-      INSERT INTO users (username, total_attempts, total_words, total_incorrect, total_time, last_attempt, last_source_text, last_answer_text, sha256)
+      INSERT INTO users (username, total_attempts, total_words, total_incorrect, total_time, last_attempt, last_source_text, last_answer_text)
       VALUES (?, 1, ?, ?, ?, ?, ?, ?)
       ON DUPLICATE KEY UPDATE
       total_attempts = total_attempts + 1,
@@ -116,7 +121,7 @@ proxy.post("/post", async (req, res, next) => {
     `;
 
     const values = [
-      username,
+      user,
       parseInt(sourceWords, 10) || 0,
       parseInt(incorrectWords, 10) || 0,
       parseFloat(pastTime) || 0.0,
@@ -129,23 +134,25 @@ proxy.post("/post", async (req, res, next) => {
 
     try {
       await conn.execute(sql, values);
-      next();
+      res.status(200).json({ success: "Data saved" });
     } finally {
       conn.release();
     }
   } catch (e) {
+    console.error(e);
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
 
-const getSha = async (Username) => {
+const getSha = async (username) => {
   const sql = "SELECT sha256 FROM users WHERE username = ?";
   const conn = await pool.getConnection();
 
   try {
-    const [rows] = await conn.execute(sql, [Username]);
+    const [rows] = await conn.execute(sql, [username]);
     return rows.length > 0 ? rows[0].sha256 : null;
   } catch (e) {
+    console.error(e);
     return null;
   } finally {
     conn.release();
@@ -173,6 +180,7 @@ const postSha = async ({ user, sha256 }) => {
   try {
     await conn.execute(sql, values);
   } catch (e) {
+    console.error(e);
   } finally {
     conn.release();
   }
