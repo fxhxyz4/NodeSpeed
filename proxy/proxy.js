@@ -48,28 +48,24 @@ const init = async () => {
 
 const formatDate = (dateStr) => {
   if (!dateStr || typeof dateStr !== "string") {
-    Messages.error("❌ Error with date format:", dateStr);
     return null;
   }
 
   const parts = dateStr.split(":").map(Number);
 
   if (parts.length !== 6) {
-    Messages.error("❌ Error with date format:", dateStr);
     return null;
   }
 
   const [day, month, year, hour, minute, second] = parts;
 
   if (isNaN(day) || isNaN(month) || isNaN(year) || isNaN(hour) || isNaN(minute) || isNaN(second)) {
-    Messages.error("❌ Date isNaN:", dateStr);
     return null;
   }
 
   const dateObj = new Date(year, month - 1, day, hour, minute, second);
 
   if (isNaN(dateObj.getTime())) {
-    Messages.error("❌ Error creating dateObj:", dateStr);
     return null;
   }
 
@@ -82,6 +78,7 @@ proxy.get("/", (req, res) => {
 
 proxy.post("/register", async (req, res) => {
   const { user, sha256 } = req.body;
+  console.log(user, sha256);
 
   if (!user || !sha256) {
     return res.status(400).json({ error: "Missing username or sha256" });
@@ -89,9 +86,7 @@ proxy.post("/register", async (req, res) => {
 
   try {
     await postSha({ user, sha256 });
-    res.json({ status: "success", message: `User ${user} with ${sha256} registered/updated` });
   } catch (e) {
-    Messages.error("❌ Error in /register:", e.message);
     res.status(500).json({ error: "Internal server error" });
   }
 });
@@ -134,13 +129,11 @@ proxy.post("/post", async (req, res, next) => {
 
     try {
       await conn.execute(sql, values);
-      Messages.log(`✅ Data for user was updated: ${username}`);
       next();
     } finally {
       conn.release();
     }
   } catch (e) {
-    Messages.error("❌ Error:", e.message);
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
@@ -153,7 +146,6 @@ const getSha = async (Username) => {
     const [rows] = await conn.execute(sql, [Username]);
     return rows.length > 0 ? rows[0].sha256 : null;
   } catch (e) {
-    Messages.error("❌ Error fetching user sha256:", e.message);
     return null;
   } finally {
     conn.release();
@@ -164,12 +156,10 @@ const checkSha = async (Username, Sha256) => {
   try {
     const storedSha = await getSha(Username);
     if (!storedSha) {
-      Messages.error(`❌ User ${Username} not found in database`);
       return false;
     }
     return storedSha === Sha256;
   } catch (e) {
-    Messages.error(`❌ Error checking SHA256 for ${Username}:`, e.message);
     return false;
   }
 };
@@ -182,9 +172,7 @@ const postSha = async ({ user, sha256 }) => {
 
   try {
     await conn.execute(sql, values);
-    Messages.log(`✅ User data saved for: ${user}`);
   } catch (e) {
-    Messages.error("❌ Error saving user sha256:", e.message);
   } finally {
     conn.release();
   }
