@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.41, for Linux (x86_64)
 --
--- Host: 127.0.0.1    Database: data
+-- Host: localhost    Database: NodeSpeed
 -- ------------------------------------------------------
 -- Server version	8.0.36-28
 
@@ -23,15 +23,17 @@ DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `users` (
-    `username` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-    `total_attempts` int NOT NULL DEFAULT '0',
-    `total_words` int NOT NULL DEFAULT '0',
-    `total_incorrect` int NOT NULL DEFAULT '0',
-    `total_time` decimal(10,2) NOT NULL DEFAULT '0.00',
-    `last_attempt` datetime DEFAULT NULL,
-    `last_source_text` text COLLATE utf8mb4_unicode_ci NOT NULL,
-    `last_answer_text` text COLLATE utf8mb4_unicode_ci NOT NULL,
-    PRIMARY KEY (`username`)
+  `username` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `total_attempts` int NOT NULL DEFAULT '0',
+  `total_words` int NOT NULL DEFAULT '0',
+  `total_incorrect` int NOT NULL DEFAULT '0',
+  `total_time` decimal(10,2) NOT NULL DEFAULT '0.00',
+  `last_attempt` datetime DEFAULT NULL,
+  `last_source_text` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `last_answer_text` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `sha256` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  PRIMARY KEY (`username`),
+  UNIQUE KEY `username` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -53,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-03-20 12:09:51
+-- Dump completed on 2025-03-24  0:18:10
