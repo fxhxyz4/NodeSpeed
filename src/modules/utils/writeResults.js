@@ -1,5 +1,6 @@
 import { Messages } from "../../../lib/messages.js";
 import { createLogDate } from "./createLogDate.js";
+import { readUserFile } from "./checkUser.js";
 import { postResults } from "./postResults.js";
 import { resultPath } from "./resultPath.js";
 import fs from "fs";
@@ -40,6 +41,7 @@ const writeResults = (Results) => {
 
   let jsonMessage = {
     user: `@${user}`,
+    sha256: readUserFile().Sha256,
     date: `${DATE}`,
     sourceWords: `${sourceLength}`,
     incorrectWords: `${numOfIncorrect}`,
