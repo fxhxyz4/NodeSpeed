@@ -32,11 +32,13 @@ rename .env.example to .env & type your info
 /NodeSpeed
  ├──/build                # nodespeed cli build
  ├──/src                  # source folder
+     ├──/auth             # github auth server
      ├──/config           # nodespeed cli config
      ├──/data             # data.json with random text
+     ├──/env              # dotenv
      ├──/modules          # main program modules
          ├──/cmd          # commands
-         ├── /utils       # utils functions
+         ├──/utils        # utils functions
      ├── main.js          # main file
      └── package.json     # package.json
 ```
