@@ -24,6 +24,7 @@ DROP TABLE IF EXISTS `users`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `users` (
   `username` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `sha256` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `total_attempts` int NOT NULL DEFAULT '0',
   `total_words` int NOT NULL DEFAULT '0',
   `total_incorrect` int NOT NULL DEFAULT '0',
@@ -31,7 +32,6 @@ CREATE TABLE `users` (
   `last_attempt` datetime DEFAULT NULL,
   `last_source_text` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `last_answer_text` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `sha256` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   PRIMARY KEY (`username`),
   UNIQUE KEY `username` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
