@@ -1,4 +1,3 @@
-import { Messages } from "../../lib/messages.js";
 import mysql from "mysql2/promise";
 import dotenv from "dotenv";
 import path from "path";
@@ -16,15 +15,15 @@ const createPool = async () => {
       password: DB_PASS,
       database: DB_NAME,
       port: DB_PORT,
+      connectionLimit: 5,
+      queueLimit: 10,
       waitForConnections: true,
-      connectionLimit: 10,
-      queueLimit: 0,
     });
 
-    Messages.debug("✅ Database pool created successfully");
+    console.debug("✅ Database pool created successfully");
     return pool;
   } catch (e) {
-    Messages.error(e);
+    console.error(e);
     throw e;
   }
 };
