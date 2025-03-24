@@ -8,7 +8,7 @@ import { typeHelp } from "../cmd/typeHelp.js";
 import { aboutCmd } from "../cmd/aboutCmd.js";
 import { helpCmd } from "../cmd/helpCmd.js";
 
-const cli = async (Params) => {
+const cli = async (Params, secret) => {
   if (!Params || typeof Params !== "object") {
     Messages.error("Params object incorrect");
     return;
@@ -50,7 +50,7 @@ const cli = async (Params) => {
   }
 
   let result = await checkConfig();
-  timeoutPerStart([result, config.m, config.t]);
+  timeoutPerStart([result, config.m, config.t], secret);
 };
 
 export { cli };
