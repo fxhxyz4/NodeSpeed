@@ -67,7 +67,7 @@ const App = () => {
                                         <p className="item__link">
                                             <b>{link.name}</b>
                                         </p>
-                                        <a className="item__link" href={link.url}>
+                                        <a className="item__link" href={link.url} target="_blank">
                                             <i>{link.url}</i>
                                         </a>
                                         <p
