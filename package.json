@@ -44,7 +44,7 @@
     "changeIcon": "node ./pkg/changeIcon.js",
     "build": "npm run build-linux && npm run build-win && npm run build-mac && npm run changeIcon",
     "jshint:cli": "jshint src/modules/cmd/*.js src/modules/utils/*.js src/modules/*.js src/*.js -c ./.jshintrc --jslint-reporter > ./report/jslint-cli.xml",
-    "eslint": "eslint . --ignore-pattern 'proxy/' -ignore-pattern 'uptime/' --ignore-pattern 'www/' --ignore-pattern 'tests/' --ignore-pattern 'build/' --ignore-pattern 'lib/messages.js' --ignore-pattern 'src/modules/utils/cli.js'",
+    "eslint": "eslint . --ignore-pattern 'proxy/' --ignore-pattern 'uptime/' --ignore-pattern 'www/' --ignore-pattern 'tests/' --ignore-pattern 'build/' --ignore-pattern 'lib/messages.js' --ignore-pattern 'src/modules/utils/cli.js'",
     "format": "prettier --write .",
     "prepare": "husky || true",
     "test": "echo test",
