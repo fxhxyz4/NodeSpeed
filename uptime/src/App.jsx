@@ -23,6 +23,8 @@ const App = () => {
     };
 
     useEffect(() => {
+        checkLinksStatus();
+        
         const interval = setInterval(() => {
             checkLinksStatus();
         }, 6000);
