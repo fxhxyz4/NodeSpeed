@@ -25,7 +25,7 @@ const App = () => {
     useEffect(() => {
         const interval = setInterval(() => {
             checkLinksStatus();
-        }, 3000);
+        }, 6000);
 
         return () => clearInterval(interval);
     }, []);
