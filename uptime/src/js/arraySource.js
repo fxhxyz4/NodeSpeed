@@ -8,10 +8,6 @@ export default [
     url: "https://node-speed-proxy.onrender.com",
   },
   {
-    name: "DB",
-    url: "",
-  },
-  {
     name: "Web page",
     url: "https://nodespeed.vercel.app",
   },
