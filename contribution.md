@@ -180,8 +180,8 @@ using prettier & editorconfig
 + __use mysqldump ~> ./db/schema.sql__
 
 # _Uptime web page_:
-    ```sh
+```sh
         npm run dev ------- development
         npm run build ----- build
         npm run lint ------ eslint
-    ```
+```
