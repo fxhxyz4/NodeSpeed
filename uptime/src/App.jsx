@@ -24,7 +24,7 @@ const App = () => {
 
     useEffect(() => {
         checkLinksStatus();
-        
+
         const interval = setInterval(() => {
             checkLinksStatus();
         }, 6000);
@@ -66,11 +66,11 @@ const App = () => {
                             linksStatus.map((link, index) => (
                                 <li key={index} className="services__item item">
                                     <div className="item__block">
-                                        <p className="item__link">
+                                        <p className="item__link item__link--display">
                                             <b>{link.name}</b>
                                         </p>
                                         <a className="item__link" href={link.url} target="_blank">
-                                            <i>{link.url}</i>
+                                            <i>{link.url.replace("https://", "")}</i>
                                         </a>
                                         <p
                                             className={`item__status ${link.status === "Down" ? "text-red-500" : "text-green-500"}`}
