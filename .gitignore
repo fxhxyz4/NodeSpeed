@@ -1,6 +1,4 @@
 # Misc
-.eslintignore
-.eslintrc
 .github/workflows/
 .travis.yml
 docker/
