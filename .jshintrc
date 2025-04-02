@@ -10,10 +10,6 @@
     "eqnull": true,
     "asi": true,
     "curly": true,
-    "globals": {
-        "NODE_ENV": true,
-        "PORT": true
-    },
     "shadow": true,
     "module": true,
     "globalstrict": true,
