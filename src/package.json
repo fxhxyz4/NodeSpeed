@@ -46,7 +46,7 @@
     "test-s2": "node main.js -s=https://raw.githubusercontent.com/fxhxyz4/NodeSpeed/refs/heads/main/tests/file.txt",
     "test-stats": "node main.js --stats",
     "test-o": "node main.js -o",
-    "test-all-normal": "node main.js -c=1 -l=en -m=normal",
+    "test-all-normal": "node main.js -c=3 -l=en -m=normal",
     "test-all-normal-s": "node main.js -c=1 -l=en -m=normal -s=../../tests/file.txt",
     "test-all-timed": "node main.js -c=1 -l=en -m=timed -t=8000",
     "test-all-timed-s": "node main.js -c=1 -l=en -m=timed -t=8000 -s=../tests/file.txt",

@@ -3,7 +3,7 @@ import { startProgram } from "../startProgram.js";
 import { getUser } from "./getUser.js";
 
 const timeoutPerStart = async (DataText, secret) => {
-  const TIMEOUT = 10;
+  const TIMEOUT = 2;
 
   if (!DataText) {
     Messages.error("No data to start");
