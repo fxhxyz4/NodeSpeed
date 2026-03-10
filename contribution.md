@@ -47,7 +47,7 @@ rename .env.example to .env & type your info
 
 ### how to test:
 ```
-use this commands from package.json file from test:
+use this commands from package.json file for test:
 
 npm run test-h
 npm run test-a
@@ -72,7 +72,7 @@ npm run test-all-timed-s
 
 ### code style:
 ```
-using prettier & editorconfig
+use prettier & editorconfig
 ```
 
 #
