@@ -146,7 +146,7 @@ use prettier & editorconfig
 
 + __Classes__: _only PascalCase format_
 
-+ __File naming__: _only pascalCase format (this also applies to classes)_
++ __File naming__: _only camelCase format_
 
 + __Errors__
     + _try catch(e)_
