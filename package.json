@@ -60,7 +60,7 @@
     "@babel/plugin-syntax-import-assertions": "^7.26.0",
     "@babel/preset-env": "^7.26.9",
     "@fxhxyz/eslint-config": "^1.0.8",
-    "@fxhxyz/prettier-config": "^1.2.0",
+    "@fxhxyz/prettier-config": "^2.0.8",
     "babel-loader": "^10.0.0",
     "concurrently": "^9.1.2",
     "core-js": "^3.41.0",
