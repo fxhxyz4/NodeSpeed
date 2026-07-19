@@ -131,6 +131,8 @@ const initMatchmaking = (io) => {
   setInterval(cleanupStaleRooms, 60 * 1000).unref();
 
   io.on("connection", (socket) => {
+    io.emit("status:online", io.engine.clientsCount);
+
     socket.on("queue:find", ({ username } = {}) => {
       leaveEverything(io, socket);
       const name = displayName(username);
@@ -198,7 +200,10 @@ const initMatchmaking = (io) => {
 
     socket.on("race:finish", (payload = {}) => finishRace(io, socket, payload));
 
-    socket.on("disconnect", () => leaveEverything(io, socket));
+    socket.on("disconnect", () => {
+      leaveEverything(io, socket);
+      io.emit("status:online", io.engine.clientsCount);
+    });
   });
 };
 
