@@ -22,7 +22,7 @@ const client = new AuthorizationCode({
 
 const openUrl = async () => {
   const authorizationUri = client.authorizeURL({
-    redirect_uri: process.env.REDIRECT, // jshint ignore:line
+    redirect_uri: `http://127.0.0.1:3005/callback`,
     scope: "user",
   });
 
@@ -32,14 +32,23 @@ const openUrl = async () => {
 const startServer = async () => {
   return new Promise((resolve, reject) => {
     const app = express();
+    const AUTH_PORT = 3005;
 
-    const server = app.listen(Number(process.env.PORT) || 3001, "0.0.0.0", async () => {
+    const server = app.listen(AUTH_PORT, "127.0.0.1", async () => {
       Messages.log("\n\n");
-
-      Messages.info(`Server started on http://localhost:${process.env.PORT}`);
+      Messages.info(`OAuth Server started on http://127.0.0.1:${AUTH_PORT}`);
       Messages.log("\n\n");
 
       await openUrl();
+    });
+
+    server.on("error", (err) => {
+      if (err.code === "EADDRINUSE") {
+        Messages.error(`Port ${AUTH_PORT} is already in use.`);
+      } else {
+        Messages.error("Server startup error:", err.message);
+      }
+      reject(err);
     });
 
     app.get("/callback", async (req, res) => {
@@ -53,8 +62,8 @@ const startServer = async () => {
         const tokenRes = await axios.post(
           "https://github.com/login/oauth/access_token",
           {
-            client_id: process.env.CLIENT_ID, // jshint ignore:line
-            client_secret: process.env.CLIENT_SECRET, // jshint ignore:line
+            client_id: process.env.CLIENT_ID,
+            client_secret: process.env.CLIENT_SECRET,
             code,
           },
           {
@@ -62,7 +71,7 @@ const startServer = async () => {
           },
         );
 
-        const accessToken = tokenRes.data.access_token; // jshint ignore:line
+        const accessToken = tokenRes.data.access_token;
 
         const userRes = await axios.get("https://api.github.com/user", {
           headers: { Authorization: `Bearer ${accessToken}` },
