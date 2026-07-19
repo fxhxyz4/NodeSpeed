@@ -1,5 +1,5 @@
 import { PackageJSON } from "../utils/packageJson.js";
-import { Messages } from "../../../lib/messages.js";
+import { Messages } from "../../../lib/messages.mjs";
 
 const versionCmd = () => {
   Messages.log(`\x1b[94mNodeSpeed version: \x1b[31m${PackageJSON.VERSION}`);

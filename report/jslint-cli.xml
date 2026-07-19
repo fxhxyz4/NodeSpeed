@@ -1,4 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <jslint>
+	<file name="src/modules/cmd/onlineCmd.js">
+		<issue line="37" char="21" reason="Expected &apos;{&apos; and instead saw &apos;return&apos;." evidence="      if (answered) return;" severity="W" />
+	</file>
+	<file name="src/modules/cmd/statsCmd.js">
+		<issue line="14" char="69" reason="Expected &apos;{&apos; and instead saw &apos;return&apos;." evidence="  if (!fs.existsSync(jsonFile) || fs.statSync(jsonFile).size === 0) return [];" severity="W" />
+		<issue line="29" char="21" reason="Expected &apos;{&apos; and instead saw &apos;return&apos;." evidence="  if (minutes &lt;= 0) return 0;" severity="W" />
+		<issue line="37" char="25" reason="Expected &apos;{&apos; and instead saw &apos;return&apos;." evidence="  if (sourceWords &lt;= 0) return 0;" severity="W" />
+		<issue line="95" char="60" reason="Identifier &apos;total_attempts&apos; is not in camel case." evidence="    Messages.log(`Total attempts:     ${data.total_attempts}`);" severity="W" />
+		<issue line="97" char="57" reason="Identifier &apos;total_words&apos; is not in camel case." evidence="    Messages.log(`Total words typed:  ${data.total_words}`);" severity="W" />
+		<issue line="98" char="61" reason="Identifier &apos;total_incorrect&apos; is not in camel case." evidence="    Messages.log(`Total incorrect:    ${data.total_incorrect}`);" severity="W" />
+		<issue line="100" char="63" reason="Identifier &apos;total_time&apos; is not in camel case." evidence="    Messages.log(`Total time spent:   ${Number(data.total_time).toFixed(2)}s`);" severity="W" />
+		<issue line="103" char="58" reason="Identifier &apos;last_attempt&apos; is not in camel case." evidence="    Messages.log(`Last attempt:       ${data.last_attempt ?? &quot;n/a&quot;}`);" severity="W" />
+	</file>
+	<file name="src/modules/utils/cli.js">
+		<issue line="50" char="29" reason="Expected &apos;{&apos; and instead saw &apos;return&apos;." evidence="          if (!loginResult) return;" severity="W" />
+	</file>
+	<file name="src/modules/startProgram.js">
+		<issue line="9" char="30" reason="This function has too many parameters. (3)" evidence="const processAnswer = async (Answer, timeStart, timeEnd) =&gt; {" severity="W" />
+		<issue line="63" char="21" reason="Expected &apos;{&apos; and instead saw &apos;process&apos;." evidence="    if (rowsUp &gt; 0) process.stdout.moveCursor(0, -rowsUp);" severity="W" />
+	</file>
 </jslint>
 

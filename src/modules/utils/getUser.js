@@ -1,12 +1,19 @@
-import { Messages } from "../../../lib/messages.js";
+import { readUserFile, FILE_PATH } from "./checkUser.js";
+import { Messages } from "../../../lib/messages.mjs";
 import { generateSha256Hash } from "./genHash.js";
 import { config } from "../../config/config.js";
-import { readUserFile, FILE_PATH } from "./checkUser.js";
 import { getToken } from "../../auth/auth.js";
 import inquirer from "inquirer";
+import path from "path";
 import fs from "fs";
 
 const writeData = (Json) => {
+  const dirPath = path.dirname(FILE_PATH);
+
+  if (!fs.existsSync(dirPath)) {
+    fs.mkdirSync(dirPath, { recursive: true });
+  }
+
   fs.writeFileSync(FILE_PATH, JSON.stringify(Json, null, 2), { encoding: "utf-8" });
 };
 

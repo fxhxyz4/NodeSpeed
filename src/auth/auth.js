@@ -1,5 +1,5 @@
 import { AuthorizationCode } from "simple-oauth2";
-import { Messages } from "../../lib/messages.js";
+import { Messages } from "../../lib/messages.mjs";
 import express from "express";
 import dotenv from "dotenv";
 import axios from "axios";

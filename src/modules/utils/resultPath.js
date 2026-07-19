@@ -5,14 +5,13 @@ import os from "node:os";
 const resultPath = () => {
   const HOME = os.homedir();
   const configPath = path.join(HOME, ".config");
+  const nodeSpeedPath = path.join(configPath, "NodeSpeed");
 
   let fileName = "results";
   const txtExt = ".txt";
 
   const csvExt = ".csv";
-
   const jsonExt = ".json";
-  const nodeSpeedPath = path.join(configPath, "NodeSpeed");
 
   if (!fs.existsSync(nodeSpeedPath)) {
     fs.mkdirSync(nodeSpeedPath, { recursive: true });
@@ -20,15 +19,7 @@ const resultPath = () => {
 
   let txtFile = path.join(nodeSpeedPath, fileName + txtExt);
   let csvFile = path.join(nodeSpeedPath, fileName + csvExt);
-
   let jsonFile = path.join(nodeSpeedPath, fileName + jsonExt);
-  let csvColumns = "\n\n\n\n\nUser,Date,All words,Incorrect words,Past time,Source text,Answer text\n";
-
-  if (!fs.existsSync(csvFile)) {
-    csvColumns = "User,Date,All words,Incorrect words,Past time,Source text,Answer text\n";
-  }
-
-  fs.appendFileSync(csvFile, csvColumns, { encoding: "utf-8" });
 
   return { txtFile, csvFile, jsonFile };
 };

@@ -1,11 +1,11 @@
-import { Messages } from "../../../lib/messages.js";
+import { Messages } from "../../../lib/messages.mjs";
 import { createLogDate } from "./createLogDate.js";
 import { readUserFile } from "./checkUser.js";
 import { postResults } from "./postResults.js";
 import { resultPath } from "./resultPath.js";
 import fs from "fs";
 
-const writeResults = (Results) => {
+const writeResults = async (Results) => {
   let { user, sourceLength, numOfIncorrect, pastTime, sourceText, answerText } = Results;
 
   let answerTextReplaced = answerText.replace("\n", "");
@@ -22,6 +22,9 @@ const writeResults = (Results) => {
 
   const { txtFile, csvFile, jsonFile } = resultPath();
   const DATE = createLogDate();
+
+  const userFile = await readUserFile();
+  const userSha256 = userFile?.Sha256 || "unknown_hash";
 
   if (fs.existsSync(jsonFile) && fs.statSync(jsonFile).size > 0) {
     try {
@@ -41,7 +44,7 @@ const writeResults = (Results) => {
 
   let jsonMessage = {
     user: `@${user}`,
-    sha256: readUserFile().Sha256,
+    sha256: userSha256,
     date: `${DATE}`,
     sourceWords: `${sourceLength}`,
     incorrectWords: `${numOfIncorrect}`,
@@ -53,9 +56,13 @@ const writeResults = (Results) => {
   data.push(jsonMessage);
   postResults(jsonMessage);
 
+  if (!fs.existsSync(csvFile)) {
+    const csvColumns = "User,Date,All words,Incorrect words,Past time,Source text,Answer text\n";
+    fs.writeFileSync(csvFile, csvColumns, { encoding: "utf-8" });
+  }
+
   fs.appendFileSync(txtFile, txtMessage, { encoding: "utf-8" });
   fs.appendFileSync(csvFile, csvMessage, { encoding: "utf-8" });
-
   fs.writeFileSync(jsonFile, JSON.stringify(data, null, 2), { encoding: "utf-8" });
 };
 

@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+  proxy:
+    build:
+      context: .
+      dockerfile: proxy/Dockerfile
+    ports:
+      - "${PORT}:${PORT}"
+    env_file:
+      - .env

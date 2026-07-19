@@ -1,6 +1,7 @@
 {
   "name": "NodeSpeed",
   "version": "1.0.0",
+  "private": true,
   "description": "CLI tool designed to test and improve typing speed. It allows users to take typing speed tests, supports different difficulty levels and languages, and logs results for further analysis",
   "keywords": [
     "type",
@@ -44,7 +45,7 @@
     "changeIcon": "node ./pkg/changeIcon.js",
     "build": "npm run build-linux && npm run build-win && npm run build-mac && npm run changeIcon",
     "jshint:cli": "jshint src/modules/cmd/*.js src/modules/utils/*.js src/modules/*.js src/*.js -c ./.jshintrc --jslint-reporter > ./report/jslint-cli.xml",
-    "eslint": "eslint . --ignore-pattern 'proxy/' --ignore-pattern 'uptime/' --ignore-pattern 'www/' --ignore-pattern 'tests/' --ignore-pattern 'build/' --ignore-pattern 'lib/messages.js' --ignore-pattern 'src/modules/utils/cli.js'",
+    "eslint": "ESLINT_USE_FLAT_CONFIG=false eslint . --ignore-pattern 'proxy/' --ignore-pattern 'uptime/' --ignore-pattern 'www/' --ignore-pattern 'tests/' --ignore-pattern 'build/' --ignore-pattern 'lib/messages.js' --ignore-pattern 'src/modules/utils/cli.js'",
     "format": "prettier --write .",
     "prepare": "husky || true",
     "test": "echo test",
@@ -73,6 +74,12 @@
     "webpack-cli": "^6.0.1",
     "webpack-manifest-plugin": "^5.0.1"
   },
+  "workspaces": [
+    "src",
+    "proxy",
+    "uptime",
+    "www"
+  ],
   "dependencies": {
     "@commitlint/cli": "^19.8.0",
     "@commitlint/config-conventional": "^19.8.0",
@@ -81,6 +88,12 @@
     "pkg": "^5.8.1"
   },
   "engines": {
-    "node": "18.x"
+    "node": "24.x"
+  },
+  "overrides": {
+    "@fxhxyz/eslint-config": {
+      "eslint": "$eslint",
+      "prettier": "$prettier"
+    }
   }
 }

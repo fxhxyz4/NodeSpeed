@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NodeSpeed — typing speed, from your terminal</title>
+    <meta
+      name="description"
+      content="NodeSpeed is a CLI tool to test and improve your typing speed. Race friends online, track your stats, right in the terminal."
+    />
+    <link rel="icon" href="data:," />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;0,800;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="scanlines" aria-hidden="true"></div>
+
+    <header class="topbar">
+      <a href="#top" class="brand">
+        <span class="brand-glyph">&gt;_</span>
+        NodeSpeed
+      </a>
+
+      <nav class="nav">
+        <a href="#features">features</a>
+        <a href="#online">online</a>
+        <a href="#download">download</a>
+        <a href="https://github.com/fxhxyz4/NodeSpeed" target="_blank" rel="noopener">github</a>
+      </nav>
+
+      <a class="btn btn-primary btn-small" href="#download">Download</a>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">$ npm i -g nodespeed</p>
+
+          <h1>
+            Type fast.<br />
+            Race friends.<br />
+            <span class="accent-cyan">Never leave the terminal.</span>
+          </h1>
+
+          <p class="lede">
+            NodeSpeed is a typing test that lives in your shell — pick a language and difficulty, race the clock, or
+            challenge someone else to a live 1v1 duel with nothing but a room code.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#download">Download NodeSpeed</a>
+            <a class="btn btn-ghost" href="#online">See how duels work</a>
+          </div>
+
+          <p class="hero-live" id="live-status">
+            <span class="dot" id="live-dot"></span>
+            <span id="live-text">checking who's online…</span>
+          </p>
+        </div>
+
+        <div class="hero-term-wrap">
+          <div class="term" role="img" aria-label="Animated demo of the NodeSpeed CLI">
+            <div class="term-bar">
+              <span class="term-dot term-dot-a"></span>
+              <span class="term-dot term-dot-b"></span>
+              <span class="term-dot term-dot-c"></span>
+              <span class="term-title">zsh — nodespeed</span>
+            </div>
+            <pre class="term-body" id="term-body"></pre>
+          </div>
+        </div>
+      </section>
+
+      <section class="stats-strip">
+        <div class="stat">
+          <span class="stat-value" id="stat-online">–</span>
+          <span class="stat-label">racers online right now</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value">3</span>
+          <span class="stat-label">languages — en / ru / ua</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value">3</span>
+          <span class="stat-label">difficulty levels</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value">1v1</span>
+          <span class="stat-label">real-time duels</span>
+        </div>
+      </section>
+
+      <section id="features" class="features">
+        <p class="section-eyebrow">features</p>
+        <h2>Everything a terminal speedrunner needs</h2>
+
+        <div class="card-grid">
+          <article class="card">
+            <p class="card-glyph accent-cyan">-l</p>
+            <h3>Three languages</h3>
+            <p>English, Russian and Ukrainian source texts, swappable with a single flag.</p>
+          </article>
+
+          <article class="card">
+            <p class="card-glyph accent-magenta">-c</p>
+            <h3>Difficulty levels</h3>
+            <p>Three complexity tiers, from warm-up paragraphs to dense technical text.</p>
+          </article>
+
+          <article class="card">
+            <p class="card-glyph accent-yellow">-m</p>
+            <h3>Normal or timed</h3>
+            <p>Race against a text with no clock, or set a hard time limit and beat it.</p>
+          </article>
+
+          <article class="card">
+            <p class="card-glyph accent-green">-s</p>
+            <h3>Bring your own text</h3>
+            <p>Point NodeSpeed at a local file or a URL and type that instead of the built-ins.</p>
+          </article>
+
+          <article class="card">
+            <p class="card-glyph accent-cyan">--stats</p>
+            <h3>Local &amp; global stats</h3>
+            <p>Every attempt is logged locally, and synced to your account so you can track progress anywhere.</p>
+          </article>
+
+          <article class="card">
+            <p class="card-glyph accent-magenta">-o</p>
+            <h3>Online duels</h3>
+            <p>Quick-match a stranger or challenge a friend with a room code. Fastest, most accurate typist wins.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="online" class="online">
+        <p class="section-eyebrow">how duels work</p>
+        <h2>One command, one code, one race</h2>
+
+        <ol class="steps">
+          <li>
+            <span class="step-index">01</span>
+            <div>
+              <h3>Run <code>nodespeed -o</code></h3>
+              <p>Choose quick match to find a random opponent, or create a private room for a friend.</p>
+            </div>
+          </li>
+          <li>
+            <span class="step-index">02</span>
+            <div>
+              <h3>Share the room code</h3>
+              <p>
+                Creating a room hands you a short code like <code class="accent-yellow">7F3K9Q</code>. Send it to
+                whoever you want to race — they run <code>nodespeed -o</code>, pick "join", and paste it in.
+              </p>
+            </div>
+          </li>
+          <li>
+            <span class="step-index">03</span>
+            <div>
+              <h3>Race, live</h3>
+              <p>
+                Both terminals get the same text at the same moment. NodeSpeed compares accuracy first, then time, and
+                announces a winner the second you both finish.
+              </p>
+            </div>
+          </li>
+        </ol>
+      </section>
+
+      <section id="download" class="download">
+        <p class="section-eyebrow">get it</p>
+        <h2>Download NodeSpeed</h2>
+        <p class="lede">Prebuilt binaries, no runtime required.</p>
+
+        <div class="download-grid">
+          <a
+            class="download-card"
+            href="https://github.com/fxhxyz4/NodeSpeed/releases/latest"
+            target="_blank"
+            rel="noopener"
+          >
+            <h3>Linux</h3>
+            <code>./NodeSpeed-linux</code>
+          </a>
+          <a
+            class="download-card"
+            href="https://github.com/fxhxyz4/NodeSpeed/releases/latest"
+            target="_blank"
+            rel="noopener"
+          >
+            <h3>Windows</h3>
+            <code>NodeSpeed-win.exe</code>
+          </a>
+          <a
+            class="download-card"
+            href="https://github.com/fxhxyz4/NodeSpeed/releases/latest"
+            target="_blank"
+            rel="noopener"
+          >
+            <h3>macOS</h3>
+            <code>./NodeSpeed-mac</code>
+          </a>
+        </div>
+
+        <p class="download-alt">
+          Prefer npm? <code>npm i -g nodespeed</code> — or clone the
+          <a href="https://github.com/fxhxyz4/NodeSpeed" target="_blank" rel="noopener">source on GitHub</a>.
+        </p>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-top">
+        <div class="footer-brand"><span class="brand-glyph">&gt;_</span> NodeSpeed</div>
+
+        <div class="footer-cols">
+          <div>
+            <h4>Product</h4>
+            <a href="https://github.com/fxhxyz4/NodeSpeed" target="_blank" rel="noopener">GitHub</a>
+            <a href="https://github.com/fxhxyz4/NodeSpeed/issues" target="_blank" rel="noopener">Issues</a>
+            <a href="https://github.com/fxhxyz4/NodeSpeed/blob/main/changelog.md" target="_blank" rel="noopener"
+              >Changelog</a
+            >
+          </div>
+          <div>
+            <h4>Legal</h4>
+            <a href="https://github.com/fxhxyz4/NodeSpeed/blob/main/license.md" target="_blank" rel="noopener"
+              >License</a
+            >
+            <a href="https://github.com/fxhxyz4/NodeSpeed/blob/main/security.md" target="_blank" rel="noopener"
+              >Security</a
+            >
+          </div>
+          <div>
+            <h4>Contact</h4>
+            <a href="mailto:fxhsec@proton.me">fxhsec@proton.me</a>
+            <a href="https://fxhxyz.vercel.app" target="_blank" rel="noopener">fxhxyz4</a>
+          </div>
+        </div>
+      </div>
+
+      <p class="footer-echo">$ echo "© <span id="year"></span> NodeSpeed"</p>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>

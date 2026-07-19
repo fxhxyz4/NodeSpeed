@@ -1,8 +1,10 @@
-import { Messages } from "../../../lib/messages.js";
+import { Messages } from "../../../lib/messages.mjs";
 import { versionCmd } from "../cmd/versionCmd.js";
 import { contactCmd } from "../cmd/contactCmd.js";
 import { config } from "../../config/config.js";
 import { checkConfig } from "../checkConfig.js";
+import { onlineCmd } from "../cmd/onlineCmd.js";
+import { statsCmd } from "../cmd/statsCmd.js";
 import { timeoutPerStart } from "./timeout.js";
 import { typeHelp } from "../cmd/typeHelp.js";
 import { aboutCmd } from "../cmd/aboutCmd.js";
@@ -23,28 +25,32 @@ const cli = async (Params, secret) => {
         case "h":
         case "help":
           typeHelp();
-          break;
+          return;
         case "helpCmd":
           helpCmd(key, elem);
-          break;
+          return;
         case "a":
         case "about":
           aboutCmd();
-          break;
+          return;
         case "v":
         case "version":
           versionCmd();
-          break;
+          return;
         case "contact":
           contactCmd();
-          break;
+          return;
         case "stats":
-          // statsCmd();
-          break;
+          statsCmd();
+          return;
+
         case "o":
         case "online":
-          // onlineCmd();
-          break;
+          let loginResult = await checkConfig();
+          if (!loginResult) return;
+
+          await onlineCmd();
+          return;
       }
     }
   }

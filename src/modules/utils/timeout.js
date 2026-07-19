@@ -1,4 +1,4 @@
-import { Messages } from "../../../lib/messages.js";
+import { Messages } from "../../../lib/messages.mjs";
 import { startProgram } from "../startProgram.js";
 import { getUser } from "./getUser.js";
 

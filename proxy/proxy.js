@@ -1,7 +1,11 @@
 /* jshint ignore:start */
+import { initMatchmaking, onlineCount } from "./modules/matchmaking.js";
 import { startPool } from "./modules/db_connect.js";
+import { Messages } from "../lib/messages.mjs";
 import rateLimit from "express-rate-limit";
+import { createServer } from "node:http";
 import session from "express-session";
+import { Server } from "socket.io";
 import express from "express";
 import helmet from "helmet";
 import cors from "cors";
@@ -12,11 +16,23 @@ const { PORT, URL, SESSION_SECRET, SESSION_NAME } = process.env;
 const proxy = express();
 proxy.use(cors());
 
+const httpServer = createServer(proxy);
+const io = new Server(httpServer, { cors: { origin: "*" } });
+
+initMatchmaking(io);
+
 proxy.disable("trust proxy");
 proxy.disable("x-powered-by");
 
 proxy.use(helmet());
 proxy.use(express.json());
+
+const apiLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 50,
+  message: "Too many requests, please try again later.",
+  trustProxy: false,
+});
 
 proxy.use(
   session({
@@ -28,18 +44,9 @@ proxy.use(
   }),
 );
 
-proxy.use(
-  rateLimit({
-    windowMs: 15 * 60 * 1000,
-    max: 50,
-    message: "Too many requests, please try again later.",
-    trustProxy: false,
-  }),
-);
-
 const init = async () => {
   pool = await startPool();
-  console.debug("✅ Database pool initialized");
+  Messages.debug("✅ Database pool initialized");
 };
 
 const formatDate = (dateStr) => {
@@ -62,7 +69,7 @@ const retryQuery = async (query, values, retries = 3) => {
       return result;
     } catch (e) {
       if (e.code === "ER_USER_LIMIT_REACHED") {
-        console.warn(`DB limit reached, retrying in ${attempt + 1} sec...`);
+        Messages.warn(`DB limit reached, retrying in ${attempt + 1} sec...`);
         await new Promise((res) => setTimeout(res, (attempt + 1) * 1000));
       } else {
         throw e;
@@ -80,7 +87,37 @@ const getSha256ByUsername = async (username) => {
 
 proxy.get("/", (req, res) => res.json({ status: 200 }));
 
-proxy.post("/post", async (req, res) => {
+proxy.get("/online", (req, res) => res.json({ online: onlineCount(io) }));
+
+proxy.get("/stats/:username", apiLimiter, async (req, res) => {
+  let { username } = req.params;
+
+  username = username.trim();
+  if (!username.startsWith("@")) {
+    username = `@${username}`;
+  }
+
+  try {
+    const rows = await retryQuery(
+      `SELECT username, total_attempts, total_words, total_incorrect, total_time, last_attempt
+       FROM users WHERE TRIM(username) = ?`,
+      [username],
+    );
+
+    if (rows.length === 0) return res.status(404).json({ error: "User not found" });
+
+    const stats = rows[0];
+    const accuracy =
+      stats.total_words > 0 ? (100 - (stats.total_incorrect / stats.total_words) * 100).toFixed(2) : "0.00";
+
+    res.status(200).json({ ...stats, accuracy: `${accuracy}%` });
+  } catch (e) {
+    Messages.error(e);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+proxy.post("/post", apiLimiter, async (req, res) => {
   const { user, sha256, date, sourceWords, incorrectWords, pastTime, sourceText, answerText } = req.body;
 
   try {
@@ -91,7 +128,7 @@ proxy.post("/post", async (req, res) => {
     }
 
     if (!dbSha) {
-      console.log("User not found. Creating new user...");
+      Messages.log("User not found. Creating new user...");
 
       await retryQuery(
         `INSERT INTO users (username, sha256, total_attempts, total_words, total_incorrect, total_time, last_attempt, last_source_text, last_answer_text)
@@ -108,9 +145,9 @@ proxy.post("/post", async (req, res) => {
         ],
       );
 
-      console.log("User successfully created.");
+      Messages.log("User successfully created.");
     } else {
-      console.log("User found, updating data...");
+      Messages.log("User found, updating data...");
 
       await retryQuery(
         `UPDATE users SET total_attempts = total_attempts + 1,
@@ -132,21 +169,21 @@ proxy.post("/post", async (req, res) => {
         ],
       );
 
-      console.log("User data updated.");
+      Messages.log("User data updated.");
     }
 
     res.status(200).json({ success: "Data saved" });
   } catch (e) {
-    console.error(e);
+    Messages.error(e);
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
 
 proxy.get("*", (req, res) => res.json({ status: 404 }));
 
-proxy.listen(PORT, async () => {
+httpServer.listen(PORT, async () => {
   await init();
-  console.debug(`Proxy started on ${URL}:${PORT}`);
+  Messages.debug(`Proxy (+ socket.io) started on ${URL}:${PORT}`);
 });
 
 /* jshint ignore:end */
