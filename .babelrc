@@ -1,0 +1,18 @@
+{
+    "presets": [
+        [
+            "@babel/preset-env",
+            {
+                "targets": "node 14",
+                "useBuiltIns": "usage",
+                "corejs": 3,
+                "debug": true
+            }
+        ]
+    ],
+    "plugins": [
+        "@babel/plugin-syntax-import-assertions",
+        "@babel/plugin-proposal-class-properties",
+        "@babel/plugin-proposal-private-methods"
+    ]
+}
