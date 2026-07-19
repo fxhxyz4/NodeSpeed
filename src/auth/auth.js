@@ -33,7 +33,7 @@ const startServer = async () => {
   return new Promise((resolve, reject) => {
     const app = express();
 
-    const server = app.listen(process.env.PORT, async () => {
+    const server = app.listen(Number(process.env.PORT) || 3001, "0.0.0.0", async () => {
       Messages.log("\n\n");
 
       Messages.info(`Server started on http://localhost:${process.env.PORT}`);

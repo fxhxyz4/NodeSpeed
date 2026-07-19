@@ -2,7 +2,7 @@ import { checkUserFile } from "./modules/utils/checkUser.js";
 import { showAscii } from "./modules/utils/showAscii.js";
 import { parseArgs } from "./modules/utils/parseArgs.js";
 import { processPass } from "./modules/utils/getSecret.js";
-import { Messages } from "../lib/messages.js";
+import { Messages } from "../lib/messages.mjs";
 import { cli } from "./modules/utils/cli.js";
 import { config } from "./config/config.js";
 import { getToken } from "./auth/auth.js";

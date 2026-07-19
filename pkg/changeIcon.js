@@ -1,4 +1,4 @@
-import { Messages } from "../lib/messages.js";
+import { Messages } from "../lib/messages.mjs";
 import { fileURLToPath } from "url";
 import rcedit from "rcedit";
 import path from "path";
@@ -16,5 +16,5 @@ rcedit(exePath, {
     Messages.log("Icon changed successfully!");
   })
   .catch((e) => {
-    Messages.error("Failed to change icon:", e);
+    Messages.error(`Failed to change icon: ${e?.message || e}`);
   });

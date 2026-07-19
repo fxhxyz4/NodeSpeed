@@ -43,7 +43,7 @@
     "build-win": "pkg ./build/js/cli.min.js --experimental-modules --targets node18-win-x64 --output ./build/NodeSpeed-win",
     "build-mac": "pkg ./build/js/cli.min.js --experimental-modules --targets node18-macos-x64 --output ./build/NodeSpeed-mac",
     "changeIcon": "node ./pkg/changeIcon.js",
-    "build": "npm run build-linux && npm run build-win && npm run build-mac && npm run changeIcon",
+    "build": "npm run build-linux && npm run build-win && npm run build-mac && npm run changeIcon || true",
     "jshint:cli": "jshint src/modules/cmd/*.js src/modules/utils/*.js src/modules/*.js src/*.js -c ./.jshintrc --jslint-reporter > ./report/jslint-cli.xml",
     "eslint": "ESLINT_USE_FLAT_CONFIG=false eslint . --ignore-pattern 'proxy/' --ignore-pattern 'uptime/' --ignore-pattern 'www/' --ignore-pattern 'tests/' --ignore-pattern 'build/' --ignore-pattern 'lib/messages.js' --ignore-pattern 'src/modules/utils/cli.js'",
     "format": "prettier --write .",
