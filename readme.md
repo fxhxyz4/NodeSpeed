@@ -1,4 +1,4 @@
-# NodeSpeed
+# NodeSpeed - [Status page](https://node-speed-proxy.onrender.com/)
 
 A typing speed test that lives in your terminal — pick a language and a
 difficulty, race against the clock, or challenge someone else to a live 1v1
