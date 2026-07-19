@@ -127,6 +127,10 @@ proxy.post("/post", apiLimiter, async (req, res) => {
       return res.status(403).json({ error: "Invalid SHA256 hash" });
     }
 
+    const safeDate = formatDate(date);
+    const safeSourceText = sourceText ?? null;
+    const safeAnswerText = answerText ?? null;
+
     if (!dbSha) {
       Messages.log("User not found. Creating new user...");
 
@@ -139,9 +143,9 @@ proxy.post("/post", apiLimiter, async (req, res) => {
           parseInt(sourceWords, 10) || 0,
           parseInt(incorrectWords, 10) || 0,
           parseFloat(pastTime) || 0.0,
-          formatDate(date),
-          sourceText,
-          answerText,
+          safeDate,
+          safeSourceText,
+          safeAnswerText,
         ],
       );
 
@@ -162,9 +166,9 @@ proxy.post("/post", apiLimiter, async (req, res) => {
           parseInt(sourceWords, 10) || 0,
           parseInt(incorrectWords, 10) || 0,
           parseFloat(pastTime) || 0.0,
-          formatDate(date),
-          sourceText,
-          answerText,
+          safeDate,
+          safeSourceText,
+          safeAnswerText,
           user,
         ],
       );
@@ -181,9 +185,10 @@ proxy.post("/post", apiLimiter, async (req, res) => {
 
 proxy.get("*", (req, res) => res.json({ status: 404 }));
 
-httpServer.listen(PORT, async () => {
+const port = process.env.PORT || 3001;
+httpServer.listen(port, "0.0.0.0", async () => {
   await init();
-  Messages.debug(`Proxy (+ socket.io) started on ${URL}:${PORT}`);
+  Messages.debug(`Proxy (+ socket.io) started on port ${port}`);
 });
 
 /* jshint ignore:end */
