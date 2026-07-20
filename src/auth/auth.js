@@ -6,29 +6,43 @@ import dotenv from "dotenv";
 import axios from "axios";
 import open from "open";
 import path from "path";
+import fs from "fs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-dotenv.config({ path: path.resolve(__dirname, "../../env/.env") });
+const envPaths = [
+  path.resolve(__dirname, "../env/.env"),
+  path.resolve(__dirname, "../../.env"),
+  path.resolve(process.cwd(), "src/env/.env"),
+  path.resolve(process.cwd(), ".env"),
+];
+
+const foundPath = envPaths.find((p) => fs.existsSync(p));
+if (foundPath) {
+  dotenv.config({ path: foundPath });
+}
+
+const CLIENT_ID = process.env.CLIENT_ID || "Ov23lizMN0q7nfcB3BZS";
+const CLIENT_SECRET = process.env.CLIENT_SECRET || "3e07d7df4fac4b4c63069afeb53aa2a63271ef5a";
+const AUTH_URL = process.env.AUTH_URL || "https://github.com/login/oauth/authorize";
+const TOKEN_URL = process.env.TOKEN_URL || "https://github.com/login/oauth/access_token";
 
 const client = new AuthorizationCode({
   client: {
-    id: process.env.CLIENT_ID,
-    secret: process.env.CLIENT_SECRET,
+    id: CLIENT_ID,
+    secret: CLIENT_SECRET,
   },
   auth: {
     tokenHost: "https://github.com",
-    tokenPath: process.env.TOKEN_URL,
-    authorizePath: process.env.AUTH_URL,
+    tokenPath: TOKEN_URL,
+    authorizePath: AUTH_URL,
   },
 });
 
 const openUrl = async () => {
-  const authorizationUri = client.authorizeURL({
-    redirect_uri: "http://127.0.0.1:3005/callback",
-    scope: "user",
-  });
+  const redirectUri = encodeURIComponent("http://127.0.0.1:3005/callback");
+  const authorizationUri = `${AUTH_URL}?response_type=code&client_id=${CLIENT_ID}&redirect_uri=${redirectUri}&scope=user`;
 
   await open(authorizationUri);
 };
@@ -64,10 +78,10 @@ const startServer = async () => {
 
       try {
         const tokenRes = await axios.post(
-          "https://github.com/login/oauth/access_token",
+          TOKEN_URL,
           {
-            client_id: process.env.CLIENT_ID,
-            client_secret: process.env.CLIENT_SECRET,
+            client_id: CLIENT_ID,
+            client_secret: CLIENT_SECRET,
             code,
           },
           {
@@ -89,7 +103,6 @@ const startServer = async () => {
         Messages.info("Server closed");
 
         resolve(userRes.data.login);
-        return userRes.data.login;
       } catch (e) {
         Messages.error("Error auth:", e.message);
 
