@@ -21,7 +21,7 @@ const io = new Server(httpServer, { cors: { origin: "*" } });
 
 initMatchmaking(io);
 
-proxy.disable("trust proxy");
+proxy.disable("trust proxy", 1);
 proxy.disable("x-powered-by");
 
 proxy.use(helmet());
