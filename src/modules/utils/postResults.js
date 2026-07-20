@@ -1,16 +1,22 @@
 import { Messages } from "../../../lib/messages.mjs";
 import dotenv from "dotenv";
 import axios from "axios";
+import path from "path";
+import { fileURLToPath } from "url";
 
-dotenv.config({ path: "./env/.env" });
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+dotenv.config({ path: path.resolve(__dirname, "../../../env/.env") });
 
 const postResults = async (JsonMessage) => {
   try {
-    if (!process.env.URL && !process.env.PORT) {
-      throw new Error("process.env.URL or process.env.PORT is undefined. Check your .env path!");
-    }
+    const targetUrl = process.env.PROXY_URL || process.env.URL || "https://node-speed-proxy.onrender.com";
+    const cleanUrl = targetUrl.replace(/\/$/, "");
 
-    await axios.post(`${process.env.URL}:3001/post`, JsonMessage);
+    await axios.post(`${cleanUrl}/post`, JsonMessage);
+
+    Messages.log("✅ Результаты успешно отправлены на сервер!");
     process.exit(0);
   } catch (e) {
     Messages.error("\n[AXIOS CRASH DETAILS]:");
@@ -18,7 +24,7 @@ const postResults = async (JsonMessage) => {
       Messages.error(JSON.stringify(e.response.data, null, 2));
     } else {
       Messages.error(`Error Message: ${e.message}`);
-      Messages.error(`Target URL: ${process.env.URL}:3001/post`);
+      Messages.error(`Target URL: ${e.config?.url || "undefined"}`);
     }
   }
 };

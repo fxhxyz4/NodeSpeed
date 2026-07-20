@@ -1,12 +1,16 @@
 import { AuthorizationCode } from "simple-oauth2";
 import { Messages } from "../../lib/messages.mjs";
+import { fileURLToPath } from "url";
 import express from "express";
 import dotenv from "dotenv";
 import axios from "axios";
 import open from "open";
 import path from "path";
 
-dotenv.config({ path: path.resolve(process.cwd(), "../env/.env") });
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+dotenv.config({ path: path.resolve(__dirname, "../../env/.env") });
 
 const client = new AuthorizationCode({
   client: {
@@ -22,7 +26,7 @@ const client = new AuthorizationCode({
 
 const openUrl = async () => {
   const authorizationUri = client.authorizeURL({
-    redirect_uri: `http://127.0.0.1:3005/callback`,
+    redirect_uri: "http://127.0.0.1:3005/callback",
     scope: "user",
   });
 
