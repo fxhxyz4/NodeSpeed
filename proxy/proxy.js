@@ -117,6 +117,46 @@ proxy.get("/stats/:username", apiLimiter, async (req, res) => {
   }
 });
 
+proxy.post("/oauth/github", apiLimiter, async (req, res) => {
+  const { code } = req.body;
+
+  if (!code) {
+    return res.status(400).json({ error: "Code parameter is required" });
+  }
+
+  try {
+    const tokenRes = await axios.post(
+      process.env.TOKEN_URL || "https://github.com/login/oauth/access_token",
+      {
+        client_id: process.env.CLIENT_ID,
+        client_secret: process.env.CLIENT_SECRET,
+        code,
+      },
+      {
+        headers: { Accept: "application/json" },
+      },
+    );
+
+    const accessToken = tokenRes.data.access_token;
+
+    if (!accessToken) {
+      return res.status(401).json({ error: "Failed to obtain access token", details: tokenRes.data });
+    }
+
+    const userRes = await axios.get("https://api.github.com/user", {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    });
+
+    res.status(200).json({
+      accessToken,
+      user: userRes.data,
+    });
+  } catch (e) {
+    Messages.error("OAuth Exchange Error:", e.response?.data || e.message);
+    res.status(500).json({ error: "Authentication failed on proxy" });
+  }
+});
+
 proxy.post("/post", apiLimiter, async (req, res) => {
   const { user, sha256, date, sourceWords, incorrectWords, pastTime, sourceText, answerText } = req.body;
 
