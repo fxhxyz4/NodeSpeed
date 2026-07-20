@@ -23,8 +23,8 @@ if (foundPath) {
   dotenv.config({ path: foundPath });
 }
 
-const CLIENT_ID = process.env.CLIENT_ID || "Ov23lizMN0q7nfcB3BZS";
-const CLIENT_SECRET = process.env.CLIENT_SECRET || "3e07d7df4fac4b4c63069afeb53aa2a63271ef5a";
+const CLIENT_ID = process.env.CLIENT_ID;
+const CLIENT_SECRET = process.env.CLIENT_SECRET;
 const AUTH_URL = process.env.AUTH_URL || "https://github.com/login/oauth/authorize";
 const TOKEN_URL = process.env.TOKEN_URL || "https://github.com/login/oauth/access_token";
 
