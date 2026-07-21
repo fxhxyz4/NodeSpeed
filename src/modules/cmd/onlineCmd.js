@@ -133,7 +133,11 @@ const onlineCmd = async () => {
   Messages.clr();
   Messages.info("Connecting to the online server...");
 
-  const socket = ioClient(`${process.env.URL}:3001`);
+  const serverUrl = (process.env.PROXY_URL || "https://node-speed-proxy.onrender.com").replace(/\/$/, "");
+
+  const socket = ioClient(serverUrl, {
+    transports: ["websocket"],
+  });
 
   socket.on("connect_error", (e) => {
     Messages.clr();

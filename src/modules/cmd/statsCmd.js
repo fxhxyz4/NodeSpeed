@@ -89,7 +89,7 @@ const renderGlobalStats = async (Username) => {
   }
 
   try {
-    const { data } = await axios.get(`${process.env.URL}:3001/stats/${encodeURIComponent(Username)}`);
+    const { data } = await axios.get(`${process.env.PROXY_URL}/stats/${encodeURIComponent(Username)}`);
 
     Messages.log(`Username:           ${data.username?.trim?.() ?? Username}`);
     Messages.log(`Total attempts:     ${data.total_attempts}`);

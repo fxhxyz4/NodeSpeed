@@ -7,15 +7,15 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-dotenv.config({ path: path.resolve(__dirname, "../../../env/.env") });
+dotenv.config({ path: path.resolve(__dirname, "../../env/.env") });
 
 const postResults = async (JsonMessage) => {
   try {
-    const targetUrl = process.env.PROXY_URL || process.env.URL || "https://node-speed-proxy.onrender.com";
+    const targetUrl = process.env.PROXY_URL || "https://node-speed-proxy.onrender.com";
     const cleanUrl = targetUrl.replace(/\/$/, "");
 
+    console.log(`Sending request to: ${cleanUrl}/post`);
     await axios.post(`${cleanUrl}/post`, JsonMessage);
-
     Messages.log("✅ Результаты успешно отправлены на сервер!");
     process.exit(0);
   } catch (e) {
