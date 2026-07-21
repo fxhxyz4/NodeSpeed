@@ -7,6 +7,7 @@ import { createServer } from "node:http";
 import session from "express-session";
 import { Server } from "socket.io";
 import express from "express";
+import dotenv from "dotenv";
 import helmet from "helmet";
 import axios from "axios";
 import cors from "cors";
