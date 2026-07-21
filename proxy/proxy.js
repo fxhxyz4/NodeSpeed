@@ -11,6 +11,8 @@ import helmet from "helmet";
 import axios from "axios";
 import cors from "cors";
 
+dotenv.config({ path: "./.env" });
+
 let pool = null;
 const { PORT, URL, SESSION_SECRET, SESSION_NAME } = process.env;
 
