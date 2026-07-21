@@ -3,16 +3,19 @@ import { initMatchmaking, onlineCount } from "./modules/matchmaking.js";
 import { startPool } from "./modules/db_connect.js";
 import { Messages } from "../lib/messages.mjs";
 import rateLimit from "express-rate-limit";
+import { fileURLToPath } from "node:url";
 import { createServer } from "node:http";
 import session from "express-session";
 import { Server } from "socket.io";
 import express from "express";
+import path from "node:path";
 import dotenv from "dotenv";
 import helmet from "helmet";
 import axios from "axios";
 import cors from "cors";
 
-dotenv.config({ path: "./.env" });
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+dotenv.config({ path: path.resolve(__dirname, ".env") });
 
 let pool = null;
 const { PORT, URL, SESSION_SECRET, SESSION_NAME } = process.env;
