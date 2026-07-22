@@ -16,6 +16,9 @@
 	<file name="src/modules/utils/cli.js">
 		<issue line="50" char="29" reason="Expected &apos;{&apos; and instead saw &apos;return&apos;." evidence="          if (!loginResult) return;" severity="W" />
 	</file>
+	<file name="src/modules/utils/getUser.js">
+		<issue line="53" char="13" reason="&apos;upsertUserInDb&apos; is not defined." evidence="      await upsertUserInDb(UserName, Sha256);" severity="W" />
+	</file>
 	<file name="src/modules/utils/postResults.js">
 		<issue line="7" char="7" reason="Redefinition of &apos;__filename&apos;." evidence="const __filename = fileURLToPath(import.meta.url);" severity="W" />
 		<issue line="8" char="7" reason="Redefinition of &apos;__dirname&apos;." evidence="const __dirname = path.dirname(__filename);" severity="W" />

@@ -1,4 +1,5 @@
 import { readUserFile, FILE_PATH } from "./checkUser.js";
+import { upsertUserInDb } from "./upsertUserInDb.js";
 import { Messages } from "../../../lib/messages.mjs";
 import { generateSha256Hash } from "./genHash.js";
 import { config } from "../../config/config.js";
