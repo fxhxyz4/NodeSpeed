@@ -50,6 +50,7 @@ const getUser = async (Secret) => {
         process.exit(1);
       }
     } else {
+      await upsertUserInDb(UserName, Sha256);
       writeData({ UserName, Sha256 });
     }
   }
