@@ -4,6 +4,7 @@ import { Messages } from "../../../lib/messages.mjs";
 const aboutCmd = () => {
   let { NAME, DESC, HOME_PAGE, BUGS_URL, LICENSE } = PackageJSON;
 
+  Messages.log("\n\n");
   Messages.log(`\x1b[95m${NAME} — ${DESC}`);
   Messages.log("\n");
 

@@ -49,7 +49,7 @@
     "test-all-normal": "node main.js -c=3 -l=en -m=normal",
     "test-all-normal-s": "node main.js -c=1 -l=en -m=normal -s=../../tests/file.txt",
     "test-all-timed": "node main.js -c=1 -l=en -m=timed -t=8000",
-    "test-all-timed-s": "node main.js -c=1 -l=en -m=timed -t=8000 -s=../tests/file.txt",
+    "test-all-timed-s": "node main.js -c=1 -l=en -m=timed -t=8000 -s=../../tests/file.txt",
     "test": "echo test",
     "prettier": "prettier --write --parser babel ."
   },

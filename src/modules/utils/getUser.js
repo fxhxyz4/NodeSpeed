@@ -19,7 +19,6 @@ const writeData = (Json) => {
 
 const getUser = async (Secret) => {
   Messages.log("\n\n");
-
   Messages.info("Select 'anon' user for not saving stats mode");
   Messages.log("\n\n");
 
@@ -42,10 +41,17 @@ const getUser = async (Secret) => {
   }
 
   if (user !== "anon") {
-    let UserName = config.u;
+    const UserName = config.u;
+    const Sha256 = generateSha256Hash(UserName, Secret);
 
-    const Sha256 = generateSha256Hash(config.u, Secret);
-    writeData({ UserName, Sha256 });
+    if (userFile && userFile.UserName === UserName) {
+      if (userFile.Sha256 !== Sha256) {
+        Messages.error("Password incorrect");
+        process.exit(1);
+      }
+    } else {
+      writeData({ UserName, Sha256 });
+    }
   }
 
   return true;
