@@ -19,4 +19,9 @@ const readUserFile = () => {
   }
 };
 
-export { FILE_PATH, checkUserFile, readUserFile };
+const isLoggedIn = () => {
+  const data = readUserFile();
+  return !!(data && data.UserName && data.Sha256 && data.UserName !== "anon");
+};
+
+export { FILE_PATH, checkUserFile, readUserFile, isLoggedIn };

@@ -1,5 +1,5 @@
 import { searchIncorrectWords } from "../utils/searchIncorrectWords.js";
-import { readUserFile } from "../utils/checkUser.js";
+import { readUserFile, isLoggedIn } from "../utils/checkUser.js";
 import { Messages } from "../../../lib/messages.mjs";
 import { config } from "../../config/config.js";
 import { io as ioClient } from "socket.io-client";
@@ -115,6 +115,17 @@ const promptRoomCode = async () => {
 };
 
 const onlineCmd = async () => {
+  if (!isLoggedIn()) {
+    Messages.error("You must log in to use online mode");
+    Messages.info("Run the login with the command ...");
+
+    Messages.log("\n");
+    Messages.info("Use: ./execute_file");
+
+    Messages.log("\n");
+    return;
+  }
+
   const username = readUserFile()?.UserName || config.u;
 
   if (!process.env.URL) {
