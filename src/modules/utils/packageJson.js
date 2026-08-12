@@ -1,12 +1,4 @@
-import { fileURLToPath } from "url";
-import path from "path";
-import fs from "fs";
-
-const __filename = fileURLToPath(import.meta.url); // jshint ignore:line
-const __dirname = path.dirname(__filename); // jshint ignore:line
-
-const packageJsonPath = path.resolve(__dirname, "../../../package.json");
-const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, "utf-8"));
+import packageJson from "../../../package.json";
 
 const { name, description, version, keywords, main, author, homepage, bugs, license } = packageJson;
 
