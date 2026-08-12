@@ -35,7 +35,8 @@
   ],
   "pkg": {
     "assets": [
-      "./src/data/*"
+      "./src/data/*",
+      "./package.json"
     ]
   },
   "scripts": {
