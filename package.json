@@ -67,7 +67,7 @@
     "concurrently": "^9.1.2",
     "core-js": "^3.41.0",
     "dotenv-webpack": "^8.1.0",
-    "eslint": "^9.33.0",
+    "eslint": "^10.8.1",
     "globals": "^17.3.0",
     "prettier": "3.6.2",
     "rcedit": "^5.0.2",
