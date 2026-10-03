@@ -62,7 +62,7 @@
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "inquirer": "^12.5.0",
-    "moment": "^2.30.1",
+    "moment": "^2.31.0",
     "open": "^10.1.0",
     "simple-oauth2": "^5.1.0",
     "socket.io-client": "^4.8.3"
